@@ -1229,7 +1229,7 @@ public class Ejercicios {
 			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaPartidos)
 			// devuelve un mapa de equipos
 			// por cada equipo hay una lista de contadores
-			// que representan VICTORIAS, EMPATES Y DERROTAS
+			// que representan VICTORIAS, EMPATES Y DERROTAS.
 			{
 				try {
 					int contador= 1;
