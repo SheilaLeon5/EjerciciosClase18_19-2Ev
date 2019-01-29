@@ -1192,8 +1192,8 @@ public class Ejercicios {
 							
 							if(campos[3].equals(campos[5])) {
 
-								ArrayList<Integer> equipoLocal =  new ArrayList<Integer>(mapaEquipos.get(campos[2])); // devuelve valor de la clave
-								ArrayList<Integer> equipoVisitante = new ArrayList<Integer>(mapaEquipos.get(campos[4]));
+								ArrayList<Integer> equipoLocal =   new ArrayList<Integer>(mapaEquipos.get(campos[2])); // devuelve valor de la clave
+								ArrayList<Integer> equipoVisitante =  new ArrayList<Integer>(mapaEquipos.get(campos[4]));
 
 								//Especificar la clave para añadir el nuevo valor del arrayList a cada una de ellas
 								
@@ -1202,6 +1202,7 @@ public class Ejercicios {
 								
 								int numEmpateVisitante = equipoVisitante.get(1);
 								equipoVisitante.set(1,numEmpateVisitante+1);
+								System.out.println("r");
 							}		
 					}
 					
