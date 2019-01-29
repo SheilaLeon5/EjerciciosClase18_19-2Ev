@@ -1146,9 +1146,13 @@ public class Ejercicios {
 				}
 			}
 			
+			
+			
+			
+			
 			// --------ACTIVIDAD: Crear un método que devuelva Victorias, empates y derrotas por cada equipo  --------------------------------- 24/01/2019	
 			
-			
+/*			####### PENDIENTEEEEE ###
 			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaFichero) {
 				try {
 					
@@ -1183,18 +1187,14 @@ public class Ejercicios {
 						
 						
 						// Saber  VICTORIA / EMPATE / DERROTA y recoger el valor
-//						try {
+						
+							//ArrayList<Integer> equipoLocal = mapaEquipos.get(campos[2]); // devuelve valor de la clave
+							//ArrayList<Integer> equipoVisitante = mapaEquipos.get(campos[4]);
 							
-/*							if (Integer.parseInt(campos[3]) < Integer.parseInt(campos[5])) {
-								System.out.println("mejor compareTo   :   <0, =0 , >0");
+							// Gana equipoLocal
+							if(campos[3].compareTo(campos[5]) >0) {
 							}
-*/							
-							
 							if(campos[3].equals(campos[5])) {
-
-								ArrayList<Integer> equipoLocal =   new ArrayList<Integer>(mapaEquipos.get(campos[2])); // devuelve valor de la clave
-								ArrayList<Integer> equipoVisitante =  new ArrayList<Integer>(mapaEquipos.get(campos[4]));
-
 								//Especificar la clave para añadir el nuevo valor del arrayList a cada una de ellas
 								
 								int numEmpateLocal = equipoLocal.get(1);    // get: devuelve dato de la posicon 1 ('empate') 
@@ -1202,14 +1202,12 @@ public class Ejercicios {
 								
 								int numEmpateVisitante = equipoVisitante.get(1);
 								equipoVisitante.set(1,numEmpateVisitante+1);
-								System.out.println("r");
+
+								//mapaEquipos.get(campos[2]).set(1, mapaEquipos.get(campos[2]).get(1) + 1);
 							}		
 					}
 					
 					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
-					
-					//Declaracion e inicializacion ArrayList nombresEquipos (para mostrar por pantalla)
-					//ArrayList<String> nombreEquipos = new ArrayList<String>();
 					
 					for(String clave : clavesMapa) {
 						System.out.println(contador++ + ".- " + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
@@ -1226,9 +1224,75 @@ public class Ejercicios {
 							}
 							return null;
 			}
-			
-			
+		*/	
 
+			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaPartidos)
+			// devuelve un mapa de equipos
+			// por cada equipo hay una lista de contadores
+			// que representan VICTORIAS, EMPATES Y DERROTAS
+			{
+				try {
+					int contador= 1;
+					BufferedReader fichero;
+					fichero = new BufferedReader(new FileReader(rutaPartidos));
+					String registro;
+					HashMap<String, ArrayList<Integer>> equipos = new HashMap<String, ArrayList<Integer>>();
+					while ((registro = fichero.readLine()) != null) {
+						String[] campos = registro.split("#");
+						if (campos[3].equals("")) // ultimo partido jugado..
+							break;
+						String eL = campos[2];
+						String gL = campos[3];
+						String eV = campos[4];
+						String gV = campos[5];
+
+						// gracias Byron..!!
+						// si no existe eL, eV lo añadimos al mapa..
+
+						if (!equipos.containsKey(eL))
+							equipos.put(eL, new ArrayList<Integer>(Arrays.asList(0, 0, 0)));
+
+						if (!equipos.containsKey(eV))
+							equipos.put(eV, new ArrayList<Integer>(Arrays.asList(0, 0, 0)));
+
+						// cual fue el resultado ..?
+
+						if (gL.compareTo(gV) > 0) {// gana Local
+							equipos.get(eL).set(0, equipos.get(eL).get(0) + 1);
+							equipos.get(eV).set(2, equipos.get(eV).get(2) + 1);
+
+						} else if (gL.compareTo(gV) < 0) // gana Visitante
+						{// gana Local
+							equipos.get(eL).set(2, equipos.get(eL).get(2) + 1);
+							equipos.get(eV).set(0, equipos.get(eV).get(0) + 1);
+						} else { // empate
+
+							equipos.get(eL).set(1, equipos.get(eL).get(1) + 1);
+							equipos.get(eV).set(1, equipos.get(eV).get(1) + 1);
+						}
+
+					}
+					Set<String> clavesMapa = equipos.keySet(); // Devuelve las claves del mapa
+					for(String clave : clavesMapa) {
+						System.out.println(contador++ + ".- " + equipos.get(clave)); //  get: Devuelve el valor de la clave especificada
+					}
+					
+					
+					fichero.close();
+					System.out.println("Fin de la lectura del fichero");
+					return equipos;
+
+				} catch (FileNotFoundException excepcion) {
+					System.out.println("fichero no encontrado");
+
+				} catch (IOException e) {
+					System.out.println("IO Excepcion");
+				}
+				return null;
+		}
+			
+			
+			
 			
 	
 	public static void main(String[]args) {
@@ -1266,7 +1330,15 @@ public class Ejercicios {
 		
 		
 /*	
- 		 //24/01/2019--------ACTIVIDAD: Detectar cuantos partidos se han jugado(Try-catch)   ------------------------------------------------------- 
+ 
+ 
+ 
+ 		//24/01/2019--------ACTIVIDAD: Crear un método que devuelva Victorias, empates y derrotas por cada equipo   -------------------------------------------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.resultadosEquipos("ficheros/partidos.txt");
+ 
+ 
+ 		//24/01/2019--------ACTIVIDAD: Detectar cuantos partidos se han jugado(Try-catch)   ------------------------------------------------------- 
  		Ejercicios ejercicios = new Ejercicios();
 		ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
 
