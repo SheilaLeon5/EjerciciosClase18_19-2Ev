@@ -12,6 +12,8 @@ public class Persona {
 	private char sexo; // 'M' 'F'
 
 
+
+
 	public Persona() {
 		this.nif = "12345678F";
 		this.nombre="Anónimo";
@@ -20,6 +22,17 @@ public class Persona {
 		
 	}
 
+	
+	
+	// Redefinimos el método toString de Object   30/01/2019
+	@Override
+	public String toString() {
+		return this.getNombre();
+	}
+	
+	
+	
+	
 	public Persona(String nif, String nombre, int longitudPaso, String fecha_nac , char sexo ) {
 		this.nif = nif;
 		this.nombre = nombre;

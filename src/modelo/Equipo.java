@@ -10,6 +10,15 @@ public class Equipo {
 		//Constructor vacío
 	}
 
+	// Redefinimos el método toString de Object   30/01/2019
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
+
+	
+	
+	
 	public Equipo(int idEquipo, String nombreCorto, String nombre) {
 		super();
 		this.idEquipo = idEquipo;

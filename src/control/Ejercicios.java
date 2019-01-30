@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import modelo.Equipo;
@@ -307,7 +311,7 @@ public class Ejercicios {
 		 * 					crear un método que devuelva una lista de 'n' personas. 
 		 *		 			Se crean las personas con el constructor Persona().
 		 * 
-			public Persona[] crearListaPersona (int n){
+*/			public Persona[] crearListaPersona (int n){
 				Persona[] personas = new Persona[n];
 				for(int i=0; i < n; i++)
 					personas [i] = new Persona();	
@@ -323,7 +327,7 @@ public class Ejercicios {
 		}
 	 }
 	 
-*/	 
+	 
 	 
 	/* ---------ACTIVIDAD: Dan dos cadenas de caracteres por parámetros que hay que comparar entre sí (CompareTo)
 	public void comparaCadenaOrdenAlf(String cadena1, String cadena2){
@@ -1272,10 +1276,10 @@ public class Ejercicios {
 						}
 
 					}
-					Set<String> clavesMapa = equipos.keySet(); // Devuelve las claves del mapa
+/*					Set<String> clavesMapa = equipos.keySet(); // Devuelve las claves del mapa
 					for(String clave : clavesMapa) {
 						System.out.println(contador++ + ".- " + equipos.get(clave)); //  get: Devuelve el valor de la clave especificada
-					}
+					}*/
 					
 					
 					fichero.close();
@@ -1291,14 +1295,59 @@ public class Ejercicios {
 				return null;
 		}
 			
+		
+
+			// --------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos  --------------------------------- 30/01/2019
 			
+			/*
+			 *  Lo que haremos es pasarle como parámetro lo que devuelve el método 'resultadosEquipos'
+			 */
+			
+			public void muestraPuntosEquipos (HashMap<String, ArrayList<Integer>> resultados) {
+			
+				// recorrer el HashMap... 
+				// obtenemos la lista de claves (K)			
+				for (String clave : resultados.keySet()) {
+					ArrayList<Integer> datos = resultados.get(clave);
+					int puntos = datos.get(0)*3 + datos.get(1);
+					System.out.println(clave + " => " + puntos);
+				}
+			}
+			
+			
+			
+			
+			// --------ACTIVIDAD: Mostrar en una ventana los equipos usados en el fichero Equipos - SWING--------------------------------- 30/01/2019
+			
+
+			public void pruebaSWING() {
+				JFrame ventana;
+				ventana = new JFrame("Mi primer SWING");
+				JButton boton= new JButton("Pulsame!");
+				JPanel panel = new JPanel();
+				ventana.add(panel);
+				
+				
+				ArrayList<Equipo> equipos = this.creaListaEquipos("ficheros/equipos.txt");
+				Equipo[] arrayEquipos = equipos.toArray(new Equipo[equipos.size()]);
+				
+				JComboBox lista = new JComboBox(arrayEquipos);
+				panel.add(lista);
+				panel.add(boton);
+				ventana.pack();
+				ventana.setVisible(true);
+			}
 			
 			
 	
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		ejercicios.resultadosEquipos("ficheros/partidos.txt");
+		
+
+		HashMap<String, ArrayList<Integer>> resultado = ejercicios.resultadosEquipos("ficheros/partidos.txt");
+		ejercicios.muestraPuntosEquipos(resultado);
+		
 		System.exit(0); // Si hay código debajo no se ejecutará  SOLO HASTA AQUÍ
 		HashMap<String, Integer> equipos = ejercicios.comprobarPartidos("ficheros/partidos.txt");
 
@@ -1330,21 +1379,28 @@ public class Ejercicios {
 		
 		
 /*	
+ 		//30/01/2019--------ACTIVIDAD:Mostrar en una ventana los equipos usados en el fichero Equipos - SWING ------------------------------------
+ 		ejercicios ejercicios = new Ejercicios();
+		ejercicios.pruebaSWING();
  
  
+ 		//30/01/2019--------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos ------------------------------------------------------
+ 		HashMap<String, ArrayList<Integer>> resultado = ejercicios.resultadosEquipos("ficheros/partidos.txt");
+		ejercicios.muestraPuntosEquipos(resultado);
+ 		
  
- 		//24/01/2019--------ACTIVIDAD: Crear un método que devuelva Victorias, empates y derrotas por cada equipo   -------------------------------------------------------
+ 		//24/01/2019--------ACTIVIDAD: Crear un método que devuelva Victorias, empates y derrotas por cada equipo   ---------------------------------
  		Ejercicios ejercicios = new Ejercicios();
 		ejercicios.resultadosEquipos("ficheros/partidos.txt");
  
  
- 		//24/01/2019--------ACTIVIDAD: Detectar cuantos partidos se han jugado(Try-catch)   ------------------------------------------------------- 
+ 		//24/01/2019--------ACTIVIDAD: Detectar cuantos partidos se han jugado(Try-catch)   ---------------------------------------------------------
  		Ejercicios ejercicios = new Ejercicios();
 		ejercicios.mostrarNumeroPartidosJugadosTry("ficheros/partidos.txt");
 
  		
  
- 		//23/01/2019--------ACTIVIDAD: Detectar cuantos partidos se han jugado   ------------------------------------------------------- 
+ 		//23/01/2019--------ACTIVIDAD: Detectar cuantos partidos se han jugado   --------------------------------------------------------------------
  		Ejercicios ejercicios = new Ejercicios();
 		ejercicios.mostrarNumeroPartidosJugados("ficheros/partidos.txt");
 
