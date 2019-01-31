@@ -1334,6 +1334,8 @@ public class Ejercicios {
 					System.out.println(clave + " => " + puntos);
 				}
 				
+				
+				
 				//Ahora ordenaremos
 				
 				// creamos una lista guardar valores ordenados ( el sort soporta por parametro listas)
