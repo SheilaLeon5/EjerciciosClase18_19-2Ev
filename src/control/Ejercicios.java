@@ -8,6 +8,8 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
@@ -1313,6 +1315,44 @@ public class Ejercicios {
 					System.out.println(clave + " => " + puntos);
 				}
 			}
+			
+			
+			
+			// --------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos  --------------------------------- 31/01/2019
+			public void muestraPuntosEquiposOrdenados (HashMap<String, ArrayList<Integer>> resultados) {
+				
+				//- Recorrer el HashMap previamente ordenador por puntos... 
+				HashMap<String, Integer> mapaConPuntos = new HashMap<String, Integer>();
+
+				
+				
+				
+				for (String clave : resultados.keySet()) {
+					ArrayList<Integer> datos = resultados.get(clave);
+					int puntos = datos.get(0)*3 + datos.get(1);
+					mapaConPuntos.put(clave, puntos);
+					System.out.println(clave + " => " + puntos);
+				}
+				
+				//Ahora ordenaremos
+				
+				// creamos una lista guardar valores ordenados ( el sort soporta por parametro listas)
+				
+/*				for (String i : mapaConPuntos.keySet()) {
+					ArrayList<Integer> valoresPuntos = new ArrayList<Integer>(mapaConPuntos.get(i));
+					Collections.sort(valoresPuntos.);
+				}*/
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
