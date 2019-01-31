@@ -1344,8 +1344,7 @@ public class Ejercicios {
 					ArrayList<Integer> valoresPuntos = new ArrayList<Integer>(mapaConPuntos.get(i));
 					Collections.sort(valoresPuntos.);
 				}*/
-				
-				
+
 			}
 			
 			
