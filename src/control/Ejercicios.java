@@ -1157,66 +1157,70 @@ public class Ejercicios {
 			
 			
 			// --------ACTIVIDAD: Crear un método que devuelva Victorias, empates y derrotas por cada equipo  --------------------------------- 24/01/2019	
-			
-/*			####### PENDIENTEEEEE ###
-			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaFichero) {
+			// VERSION SHEILA1
+/*			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaFichero) {
 				try {
-					
-					//Declaracion e inicializacion Mapa
+
 					HashMap<String, ArrayList<Integer>> mapaEquipos = new HashMap<String,ArrayList<Integer>>();  
-					
-					// Declaramos e inicializamos fichero partidos
-					BufferedReader fichero;
-					fichero = new BufferedReader(new FileReader(rutaFichero));
+					BufferedReader fichero = new BufferedReader(new FileReader(rutaFichero));
 					
 					String registro;
 					int contador =0;
+					int puntosL;
+					int puntosV;
 					
 					while ((registro = fichero.readLine()) != null) {
-						// Romper cadena para obtener los datos
 						String [] campos = registro.split("#");
-						
 						if (campos[3].equals("")) {
 							break;
 						}
 						
 						//Declaracion e inicializacion ArrayList a 0,0,0 
-						ArrayList<Integer> valorInicial = new ArrayList<Integer>(Arrays.asList(0,0,0)); //asList permite inicializar un arrayList
 						
-
-						// SABER EQUIPOS: añadir clave y valor en mapa (valor: ArrayList 'valorInicial')
 						for (int i = 2; i <=4; i+=2) {
-							if (!mapaEquipos.containsKey(campos[i])) {  //Si el equipo (key) no está en el mapa se guardará
-								mapaEquipos.put(campos[i], valorInicial);
+							if (!mapaEquipos.containsKey(campos[i])) { 
+								mapaEquipos.put(campos[i], new ArrayList<Integer>(Arrays.asList(0,0,0))); //asList permite inicializar un arrayList
 							}
 						}
-						
-						
+							
 						// Saber  VICTORIA / EMPATE / DERROTA y recoger el valor
 						
-							//ArrayList<Integer> equipoLocal = mapaEquipos.get(campos[2]); // devuelve valor de la clave
-							//ArrayList<Integer> equipoVisitante = mapaEquipos.get(campos[4]);
-							
+							ArrayList<Integer> equipoLocal = mapaEquipos.get(campos[2]); // devuelve valor de la clave
+							ArrayList<Integer> equipoVisitante = mapaEquipos.get(campos[4]);
+						
 							// Gana equipoLocal
 							if(campos[3].compareTo(campos[5]) >0) {
+								puntosL = equipoLocal.get(0);
+								equipoLocal.set(0, puntosL + 1);
+								
+								puntosV = equipoVisitante.get(2);
+								equipoVisitante.set(2, puntosV + 1);
+								
+								
+							// Gana equipoVisitante	
 							}
-							if(campos[3].equals(campos[5])) {
+							if (campos[3].compareTo(campos[5]) < 0) {
+								puntosV = equipoVisitante.get(0);
+								equipoVisitante.set(0, puntosV + 1);
+								
+								puntosL = equipoLocal.get(2);
+								equipoLocal.set(2, puntosL + 1);
+								
+							}
+							// Empate
+							if(campos[3].equals(campos[5])){
 								//Especificar la clave para añadir el nuevo valor del arrayList a cada una de ellas
+								puntosL = equipoLocal.get(1);    // get: devuelve valor de la posicon 1 arrayList('empate') 
+								equipoLocal.set(1,puntosL+1);       //(1 : indice posicion , 1: incrementa en uno)
 								
-								int numEmpateLocal = equipoLocal.get(1);    // get: devuelve dato de la posicon 1 ('empate') 
-								equipoLocal.set(1,numEmpateLocal+1);       //(1 : indice posicion , 1: incrementa en uno)
-								
-								int numEmpateVisitante = equipoVisitante.get(1);
-								equipoVisitante.set(1,numEmpateVisitante+1);
-
-								//mapaEquipos.get(campos[2]).set(1, mapaEquipos.get(campos[2]).get(1) + 1);
-							}		
+								puntosV = equipoVisitante.get(1);
+								equipoVisitante.set(1,puntosV+1);
+							}
 					}
 					
 					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
-					
 					for(String clave : clavesMapa) {
-						System.out.println(contador++ + ".- " + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
+						System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
 					}
 					
 					fichero.close();
@@ -1230,7 +1234,8 @@ public class Ejercicios {
 							}
 							return null;
 			}
-		*/	
+			*/
+
 
 			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaPartidos)
 			// devuelve un mapa de equipos
@@ -1278,12 +1283,6 @@ public class Ejercicios {
 						}
 
 					}
-/*					Set<String> clavesMapa = equipos.keySet(); // Devuelve las claves del mapa
-					for(String clave : clavesMapa) {
-						System.out.println(contador++ + ".- " + equipos.get(clave)); //  get: Devuelve el valor de la clave especificada
-					}*/
-					
-					
 					fichero.close();
 					System.out.println("Fin de la lectura del fichero");
 					return equipos;
