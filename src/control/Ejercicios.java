@@ -1304,6 +1304,16 @@ public class Ejercicios {
 			 *  Lo que haremos es pasarle como parámetro lo que devuelve el método 'resultadosEquipos'
 			 */
 			
+			/* VERSION SHEILA1			
+			public void muestraPuntosEquipos (HashMap<String, ArrayList<Integer>> resultados) {
+				for (String clave : resultados.keySet()) {
+					int resultadoLiga = resultados.get(clave).get(0)*3 + resultados.get(clave).get(1)*1;
+					System.out.println(clave + "   --> " + resultadoLiga);
+				}
+				
+			}*/
+			
+			
 			public void muestraPuntosEquipos (HashMap<String, ArrayList<Integer>> resultados) {
 			
 				// recorrer el HashMap... 
@@ -1317,7 +1327,7 @@ public class Ejercicios {
 			
 			
 			
-			// --------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos  --------------------------------- 31/01/2019
+			// --------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos Ordenados --------------------------------- 31/01/2019
 			public void muestraPuntosEquiposOrdenados (HashMap<String, ArrayList<Integer>> resultados) {
 				
 				//- Recorrer el HashMap previamente ordenador por puntos... 
@@ -1422,7 +1432,15 @@ public class Ejercicios {
  		//30/01/2019--------ACTIVIDAD:Mostrar en una ventana los equipos usados en el fichero Equipos - SWING ------------------------------------
  		ejercicios ejercicios = new Ejercicios();
 		ejercicios.pruebaSWING();
- 
+ 		
+ 		
+ 		//31/01/2019--------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos ORDENADOS ------------------------------------------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+		HashMap<String, ArrayList<Integer>> resultado = ejercicios.resultadosEquipos("ficheros/partidos.txt");
+		ejercicios.muestraPuntosEquipos(resultado);
+ 		
+ 		???????????
+ 		
  
  		//30/01/2019--------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos ------------------------------------------------------
  		HashMap<String, ArrayList<Integer>> resultado = ejercicios.resultadosEquipos("ficheros/partidos.txt");
