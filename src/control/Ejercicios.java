@@ -1049,8 +1049,9 @@ public class Ejercicios {
 
 					} catch (IOException e) {
 						System.out.println("IO Excepcion");
-					}		
-				return null;
+					}
+					return null;		
+
 			}
 			
 			
@@ -1383,20 +1384,33 @@ public class Ejercicios {
 			// --------ACTIVIDAD: Ordenar HashMap   --------------------------------- 05/02/2019
 			public void ordenarMapaPuntosEquipos(HashMap<String,Integer> mapaPuntosEquipos){
 				
-				Set<Entry<String, Integer>> set = mapaPuntosEquipos.entrySet();
+				Set<Entry<String, Integer>> set = mapaPuntosEquipos.entrySet();   // entrySet --> Vista conjunta del mapa
 		        List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
-		        Collections.sort( list, new Comparator<Map.Entry<String, Integer>>()
-		        {
-		            public int compare( Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2 )
-		            {
-		                return (o2.getValue()).compareTo( o1.getValue() );
+		        Collections.sort( list, new Comparator<Map.Entry<String, Integer>>(){
+		            public int compare( Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2 ){
+		            	return (o2.getValue()).compareTo( o1.getValue() );
 		            }
 		        } );
 		        for(Map.Entry<String, Integer> entry:list){
 		            System.out.println(entry.getKey()+" ==== "+entry.getValue());
 		        }
 			}
-
+			
+			
+			
+			// --------ACTIVIDAD: listado ordenado por equipos--------------------------------- 05/02/2019
+			
+			/*
+			 * Obtener un arrayList ordenada por nombre LARGO, apartir de la lista obtenida en el método creaListaEquipos
+			 */
+			
+			
+			public void ordenarListaEquipos(ArrayList<Equipo> equipos){
+				
+			}
+			
+			
+			
 			
 			
 	public static void main(String[]args) {
