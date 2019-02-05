@@ -1,16 +1,25 @@
 package control;
 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
 import java.lang.reflect.Array;
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
@@ -18,7 +27,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import modelo.Equipo;
 import modelo.Estudiante;
@@ -1326,50 +1334,8 @@ public class Ejercicios {
 			}
 			
 			
-			
-			// --------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos Ordenados --------------------------------- 31/01/2019
-			public void muestraPuntosEquiposOrdenados (HashMap<String, ArrayList<Integer>> resultados) {
-				
-				//- Recorrer el HashMap previamente ordenador por puntos... 
-				HashMap<String, Integer> mapaConPuntos = new HashMap<String, Integer>();
-
-				
-				
-				
-				for (String clave : resultados.keySet()) {
-					ArrayList<Integer> datos = resultados.get(clave);
-					int puntos = datos.get(0)*3 + datos.get(1);
-					mapaConPuntos.put(clave, puntos);
-					System.out.println(clave + " => " + puntos);
-				}
-				
-				
-				
-				//Ahora ordenaremos
-				
-				// creamos una lista guardar valores ordenados ( el sort soporta por parametro listas)
-				
-/*				for (String i : mapaConPuntos.keySet()) {
-					ArrayList<Integer> valoresPuntos = new ArrayList<Integer>(mapaConPuntos.get(i));
-					Collections.sort(valoresPuntos.);
-				}*/
-
-			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			// --------ACTIVIDAD: Mostrar en una ventana los equipos usados en el fichero Equipos - SWING--------------------------------- 30/01/2019
 			
-
 			public void pruebaSWING() {
 				JFrame ventana;
 				ventana = new JFrame("Mi primer SWING");
@@ -1384,22 +1350,67 @@ public class Ejercicios {
 				JComboBox lista = new JComboBox(arrayEquipos);
 				panel.add(lista);
 				panel.add(boton);
+				boton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						System.out.println("Me has pulsado");
+					}
+				});
 				ventana.pack();
 				ventana.setVisible(true);
 			}
 			
 			
-	
+			
+			
+			
+			// --------ACTIVIDAD: Devolver HashMap con la puntuacion de equipos  --------------------------------- 05/02/2019
+			public HashMap<String, Integer> generaPuntosEquipos(HashMap<String, ArrayList<Integer>> mapaPartidosGEP){
+				HashMap<String, Integer> resultado = new HashMap<String,Integer>();
+				for (String clave : mapaPartidosGEP.keySet()) {
+					ArrayList<Integer> datos = mapaPartidosGEP.get(clave);
+					int puntos = datos.get(0)*3 + datos.get(1);
+					resultado.put(clave, puntos);
+					//System.out.println(clave + " -> "  +puntos);
+				}
+				return resultado;
+			}
+			
+			
+			
+			// --------ACTIVIDAD: Ordenar HashMap   --------------------------------- 05/02/2019
+			public void ordenarMapaPuntosEquipos(HashMap<String,Integer> mapaPuntosEquipos){
+				
+				Set<Entry<String, Integer>> set = mapaPuntosEquipos.entrySet();
+		        List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(set);
+		        Collections.sort( list, new Comparator<Map.Entry<String, Integer>>()
+		        {
+		            public int compare( Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2 )
+		            {
+		                return (o2.getValue()).compareTo( o1.getValue() );
+		            }
+		        } );
+		        for(Map.Entry<String, Integer> entry:list){
+		            System.out.println(entry.getKey()+" ==== "+entry.getValue());
+		        }
+			}
+
+			
+			
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		
 
-		HashMap<String, ArrayList<Integer>> resultado = ejercicios.resultadosEquipos("ficheros/partidos.txt");
-		ejercicios.muestraPuntosEquipos(resultado);
+		HashMap<String, ArrayList<Integer>> resultados = ejercicios.resultadosEquipos("ficheros/partidos.txt");
+		HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultados);  // 05/02/2019
+		ejercicios.ordenarMapaPuntosEquipos(puntosEquipos);
+		
 		
 		System.exit(0); // Si hay código debajo no se ejecutará  SOLO HASTA AQUÍ
-		HashMap<String, Integer> equipos = ejercicios.comprobarPartidos("ficheros/partidos.txt");
+		//ejercicios.muestraPuntosEquipos(resultado);
+		//HashMap<String, Integer> equipos = ejercicios.comprobarPartidos("ficheros/partidos.txt");
 
 
 		/*
@@ -1429,17 +1440,22 @@ public class Ejercicios {
 		
 		
 /*	
+ 		//05/02/2019-------ACTIVIDAD: Ordenar HashMap   -----------------------------------------------------------------------------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+		HashMap<String, ArrayList<Integer>> resultados = ejercicios.resultadosEquipos("ficheros/partidos.txt");
+		HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultados);  // 05/02/2019
+		ejercicios.ordenarMapaPuntosEquipos(puntosEquipos);
+
+ 
+ 		//05/2/2019--------ACTIVIDAD: Devolver HashMap con la puntuacion de equipos  -------------------------------------------------------------
+ 		HashMap<String, ArrayList<Integer>> resultado = ejercicios.resultadosEquipos("ficheros/partidos.txt");
+ 		HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultado);
+ 
+ 
  		//30/01/2019--------ACTIVIDAD:Mostrar en una ventana los equipos usados en el fichero Equipos - SWING ------------------------------------
  		ejercicios ejercicios = new Ejercicios();
 		ejercicios.pruebaSWING();
- 		
- 		
- 		//31/01/2019--------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos ORDENADOS ------------------------------------------------------
- 		Ejercicios ejercicios = new Ejercicios();
-		HashMap<String, ArrayList<Integer>> resultado = ejercicios.resultadosEquipos("ficheros/partidos.txt");
-		ejercicios.muestraPuntosEquipos(resultado);
- 		
- 		???????????
+
  		
  
  		//30/01/2019--------ACTIVIDAD: Crear un método que calcule los puntos de los Equipos ------------------------------------------------------
