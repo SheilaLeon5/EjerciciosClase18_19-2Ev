@@ -1038,7 +1038,7 @@ public class Ejercicios {
 							listaNombreEquipos.add(equipo);
 						}
 						
-						System.out.println(listaNombreEquipos);
+						//System.out.println(listaNombreEquipos);
 						
 						fichero.close();
 						System.out.println("Fin de la lectura del fichero");
@@ -1392,7 +1392,7 @@ public class Ejercicios {
 		            }
 		        } );
 		        for(Map.Entry<String, Integer> entry:list){
-		            System.out.println(entry.getKey()+" ==== "+entry.getValue());
+		            //System.out.println(entry.getKey()+" ==== "+entry.getValue());
 		        }
 			}
 			
@@ -1405,12 +1405,52 @@ public class Ejercicios {
 			 */
 			
 			
-			public void ordenarListaEquipos(ArrayList<Equipo> equipos){
-				
+			public ArrayList<Equipo> equiposListaOrdenadaNombre(String rutafichero){
+				 ArrayList<Equipo> lista = creaListaEquipos("ficheros/equipos.txt");
+				 lista.sort(new Comparator<Equipo>() {
+
+					@Override
+					public int compare(Equipo eq1, Equipo eq2) {
+						return eq1.getNombre().compareToIgnoreCase(eq2.getNombre());
+					}
+				});
+				 //System.out.println(lista);
+				return lista;
 			}
 			
 			
 			
+			
+			// --------ACTIVIDAD: listado ordenado por identificador--------------------------------- 05/02/2019
+			
+			/*
+			 * Obtener un arrayList mediante el id, apartir de la lista obtenida en el método creaListaEquipos.
+			 * Es decir nos mostrará nos nombres largos ordenados por id
+			 */
+			
+			
+			public ArrayList<Equipo> equiposListaOrdenadaIdentificador(String rutafichero){
+				 ArrayList<Equipo> lista = creaListaEquipos("ficheros/equipos.txt");
+/*				 lista.sort(new Comparator<Equipo>() {
+
+					@Override
+					public int compare(Equipo id2, Equipo id1) {
+						if (id1.getIdEquipo() > id2.getIdEquipo()) {
+							return 1;  // Devolvemos un número positivo
+							
+						}else if(id1.getIdEquipo() < id2.getIdEquipo()) {
+							return -1;
+						 }	
+						else {
+							return 0;
+						}
+					}
+				});
+*/
+				 lista.sort(null);
+				// System.out.println(lista);
+				return lista;
+			}
 			
 			
 	public static void main(String[]args) {
@@ -1421,6 +1461,11 @@ public class Ejercicios {
 		HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultados);  // 05/02/2019
 		ejercicios.ordenarMapaPuntosEquipos(puntosEquipos);
 		
+		
+	
+		ArrayList<Equipo> eqOrdenado = ejercicios.equiposListaOrdenadaNombre("ficheros/equipos.txt");
+		ArrayList<Equipo> eidOrdenado = ejercicios.equiposListaOrdenadaIdentificador("ficheros/equipos.txt");
+		System.out.println(4);
 		
 		System.exit(0); // Si hay código debajo no se ejecutará  SOLO HASTA AQUÍ
 		//ejercicios.muestraPuntosEquipos(resultado);
@@ -1454,6 +1499,15 @@ public class Ejercicios {
 		
 		
 /*	
+ 		//05/02/2019--------ACTIVIDAD: listado ordenado por identificador---------------------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+ 		ArrayList<Equipo> eidOrdenado = ejercicios.equiposListaOrdenadaIdentificador("ficheros/equipos.txt");
+ 		
+ 
+ 		//06/02/2019-------ACTIVIDAD:  listado ordenado por equipos -----------------------------------------------------------------------------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+ 		ArrayList<Equipo> eqOrdenado = ejercicios.equiposListaOrdenadaNombre("ficheros/equipos.txt");
+ 
  		//05/02/2019-------ACTIVIDAD: Ordenar HashMap   -----------------------------------------------------------------------------------------
  		Ejercicios ejercicios = new Ejercicios();
 		HashMap<String, ArrayList<Integer>> resultados = ejercicios.resultadosEquipos("ficheros/partidos.txt");

@@ -1,6 +1,6 @@
 package modelo;
 
-public class Equipo {
+public class Equipo implements Comparable<Equipo> {
 	private int idEquipo;
 	private String nombreCorto;
 	private String nombre;
@@ -9,14 +9,6 @@ public class Equipo {
 	public Equipo() {
 		//Constructor vacío
 	}
-
-	// Redefinimos el método toString de Object   30/01/2019
-	@Override
-	public String toString() {
-		return this.nombre;
-	}
-
-	
 	
 	
 	public Equipo(int idEquipo, String nombreCorto, String nombre) {
@@ -25,11 +17,36 @@ public class Equipo {
 		this.nombreCorto = nombreCorto;
 		this.nombre = nombre;
 	}
+	
+	
+	
 
+	// Redefinimos el método toString de Object   30/01/2019
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
 
+	
+	// 06/02/2018
+	@Override
+	public int compareTo(Equipo o) {
+		if (this.getIdEquipo() > o.getIdEquipo()) {
+			return 1;  // Devolvemos un número positivo
+			
+		}else if(this.getIdEquipo() < o.getIdEquipo()) {
+			return -1;
+		 }	
+		else {
+			return 0;
+		}
+	}
+	
 
-
-
+	
+	
+	
+	
 
 	public int getIdEquipo() {
 		return idEquipo;
@@ -58,7 +75,5 @@ public class Equipo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	
-	
+	}	
 }
