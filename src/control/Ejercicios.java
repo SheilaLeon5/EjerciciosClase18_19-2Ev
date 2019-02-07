@@ -37,9 +37,7 @@ import modelo.Persona;
  *
  */
 public class Ejercicios {
-	
 
-	
 	
 	
 // ---------------  04/10/2018                      ACTIVIDAD: BUSCAR EN LA API -------------------------------
