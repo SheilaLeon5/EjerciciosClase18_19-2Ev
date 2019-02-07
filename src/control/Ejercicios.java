@@ -1245,7 +1245,7 @@ public class Ejercicios {
 			}
 			*/
 
-
+/*
 			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaPartidos)
 			// devuelve un mapa de equipos
 			// por cada equipo hay una lista de contadores
@@ -1303,7 +1303,7 @@ public class Ejercicios {
 					System.out.println("IO Excepcion");
 				}
 				return null;
-		}
+		}*/
 			
 		
 
@@ -1330,7 +1330,7 @@ public class Ejercicios {
 				for (String clave : resultados.keySet()) {
 					ArrayList<Integer> datos = resultados.get(clave);
 					int puntos = datos.get(0)*3 + datos.get(1);
-					System.out.println(clave + " => " + puntos);
+					//System.out.println(clave + " => " + puntos);
 				}
 			}
 			
@@ -1398,7 +1398,7 @@ public class Ejercicios {
 			
 			
 			
-			// --------ACTIVIDAD: listado ordenado por equipos--------------------------------- 05/02/2019
+			// --------ACTIVIDAD: listado ordenado por equipos--------------------------------- 06/02/2019
 			
 			/*
 			 * Obtener un arrayList ordenada por nombre LARGO, apartir de la lista obtenida en el método creaListaEquipos
@@ -1414,14 +1414,14 @@ public class Ejercicios {
 						return eq1.getNombre().compareToIgnoreCase(eq2.getNombre());
 					}
 				});
-				 //System.out.println(lista);
+				 System.out.println(lista);
 				return lista;
 			}
 			
 			
 			
 			
-			// --------ACTIVIDAD: listado ordenado por identificador--------------------------------- 05/02/2019
+			// --------ACTIVIDAD: listado ordenado por identificador--------------------------------- 06/02/2019
 			
 			/*
 			 * Obtener un arrayList mediante el id, apartir de la lista obtenida en el método creaListaEquipos.
@@ -1451,21 +1451,138 @@ public class Ejercicios {
 				// System.out.println(lista);
 				return lista;
 			}
+
+
+			
+
+			
+			
+			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaFichero) {
+				try {
+
+					HashMap<String, ArrayList<Integer>> mapaEquipos = new HashMap<String,ArrayList<Integer>>();  
+					BufferedReader fichero = new BufferedReader(new FileReader(rutaFichero));
+					BufferedReader ficheroEquipos = new BufferedReader(new FileReader("ficheros/equipos.txt"));
+
+					
+					String registro;
+					String registroEquipos;
+					int contador =0;
+					int puntosL;
+					int puntosV;
+					
+												
+						while ((registro = fichero.readLine()) != null) {
+							String [] campos = registro.split("#");
+							if (campos[3].equals("")) {
+								break;
+							}
+							
+							//Declaracion e inicializacion ArrayList a 0,0,0 
+							registroEquipos = ficheroEquipos.readLine();
+							String [] camposEquipos = registro.split("#");
+							
+							for (int i = 2; i <=4; i+=2) {
+								if (!mapaEquipos.containsKey(campos[i])) { 
+									while(!campos[i].equals(camposEquipos[2]) ) {
+										String nombreEquipoLargo = camposEquipos[2];
+									}
+									mapaEquipos.put(campos[i], new ArrayList<Integer>(Arrays.asList(0,0,0))); //asList permite inicializar un arrayList
+								}
+							}
+								
+							// Saber  VICTORIA / EMPATE / DERROTA y recoger el valor
+							
+								ArrayList<Integer> equipoLocal = mapaEquipos.get(campos[2]); // devuelve valor de la clave
+								ArrayList<Integer> equipoVisitante = mapaEquipos.get(campos[4]);
+
+								
+/*							
+								// Gana equipoLocal
+								if(campos[3].compareTo(campos[5]) >0) {
+									puntosL = equipoLocal.get(0);
+									equipoLocal.set(0, puntosL + 1);
+									
+									puntosV = equipoVisitante.get(2);
+									equipoVisitante.set(2, puntosV + 1);
+									
+									
+								// Gana equipoVisitante	
+								}
+								if (campos[3].compareTo(campos[5]) < 0) {
+									puntosV = equipoVisitante.get(0);
+									equipoVisitante.set(0, puntosV + 1);
+									
+									puntosL = equipoLocal.get(2);
+									equipoLocal.set(2, puntosL + 1);
+									
+								}
+								// Empate
+								if(campos[3].equals(campos[5])){
+									//Especificar la clave para añadir el nuevo valor del arrayList a cada una de ellas
+									puntosL = equipoLocal.get(1);    // get: devuelve valor de la posicon 1 arrayList('empate') 
+									equipoLocal.set(1,puntosL+1);       //(1 : indice posicion , 1: incrementa en uno)
+									
+									puntosV = equipoVisitante.get(1);
+									equipoVisitante.set(1,puntosV+1);
+								}*/
+						}
+
+					
+					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
+					for(String clave : clavesMapa) {
+						System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
+					}
+					
+					fichero.close();
+					System.out.println("Fin de la lectura del fichero");
+					return mapaEquipos;
+					
+						}catch (FileNotFoundException excepcion) {
+							System.out.println("fichero no encontrado");
+							}catch (IOException e){
+								System.out.println("IO Excepcion");
+							}
+							return null;
+			}	
+			
+			
+			
+			// --------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo --------------------------------- 07/02/2019
+			/*
+			 * Mostrar:
+			 * - nombre largo
+			 * - partidos jugados
+			 * - goles a favor
+			 * - goles en contra
+			 * 
+			 */
+			public HashMap<String, ArrayList<Integer>> creaClasificacion(String rutaFicheroPartidos){
+				
+				
+				return null;
+			}
+			
+			
+			
+			
 			
 			
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
 
+		
+		
+		
 		HashMap<String, ArrayList<Integer>> resultados = ejercicios.resultadosEquipos("ficheros/partidos.txt");
 		HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultados);  // 05/02/2019
 		ejercicios.ordenarMapaPuntosEquipos(puntosEquipos);
-		
+		ejercicios.creaClasificacion("ficheros/partidos.txt");
 		
 	
-		ArrayList<Equipo> eqOrdenado = ejercicios.equiposListaOrdenadaNombre("ficheros/equipos.txt");
-		ArrayList<Equipo> eidOrdenado = ejercicios.equiposListaOrdenadaIdentificador("ficheros/equipos.txt");
-		System.out.println(4);
+		//ArrayList<Equipo> eqOrdenado = ejercicios.equiposListaOrdenadaNombre("ficheros/equipos.txt");
+		//ArrayList<Equipo> eidOrdenado = ejercicios.equiposListaOrdenadaIdentificador("ficheros/equipos.txt");
 		
 		System.exit(0); // Si hay código debajo no se ejecutará  SOLO HASTA AQUÍ
 		//ejercicios.muestraPuntosEquipos(resultado);
@@ -1499,7 +1616,11 @@ public class Ejercicios {
 		
 		
 /*	
- 		//05/02/2019--------ACTIVIDAD: listado ordenado por identificador---------------------------------
+ 		// 07/02/2019--------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo ---------------------------------
+ 		
+ 		
+ 		
+ 		//06/02/2019--------ACTIVIDAD: listado ordenado por identificador---------------------------------
  		Ejercicios ejercicios = new Ejercicios();
  		ArrayList<Equipo> eidOrdenado = ejercicios.equiposListaOrdenadaIdentificador("ficheros/equipos.txt");
  		
