@@ -1,6 +1,6 @@
 package modelo;
 
-public class Equipo implements Comparable<Equipo> {
+public class Equipo /*implements Comparable<Equipo>*/ {
 	private int idEquipo;
 	private String nombreCorto;
 	private String nombre;
@@ -19,7 +19,7 @@ public class Equipo implements Comparable<Equipo> {
 	}
 	
 	
-	
+
 
 	// Redefinimos el método toString de Object   30/01/2019
 	@Override
@@ -27,7 +27,7 @@ public class Equipo implements Comparable<Equipo> {
 		return this.nombre;
 	}
 
-	
+/*		
 	// 06/02/2018
 	@Override
 	public int compareTo(Equipo o) {
@@ -46,7 +46,7 @@ public class Equipo implements Comparable<Equipo> {
 	
 	
 	
-	
+	*/
 
 	public int getIdEquipo() {
 		return idEquipo;

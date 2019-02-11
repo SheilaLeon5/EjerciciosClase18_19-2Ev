@@ -1040,7 +1040,7 @@ public class Ejercicios {
 							listaNombreEquipos.add(equipo);
 						}
 						
-						//System.out.println(listaNombreEquipos);
+						System.out.println(listaNombreEquipos);
 						
 						fichero.close();
 						System.out.println("Fin de la lectura del fichero");
@@ -1075,9 +1075,10 @@ public class Ejercicios {
 						String [] campos = registro.split("#");
 						equipo = new Equipo(Integer.parseInt(campos[0]), campos[1], campos[2]);
 						listaNombreEquipos.put(campos[1],equipo);
+
 					}
 					
-					System.out.println(listaNombreEquipos);
+					//System.out.println(listaNombreEquipos);
 					
 					fichero.close();
 					System.out.println("Fin de la lectura del fichero");
@@ -1459,97 +1460,6 @@ public class Ejercicios {
 
 			
 			
-			public HashMap<String, ArrayList<Integer>> resultadosEquipos(String rutaFichero) {
-				try {
-
-					HashMap<String, ArrayList<Integer>> mapaEquipos = new HashMap<String,ArrayList<Integer>>();  
-					BufferedReader fichero = new BufferedReader(new FileReader(rutaFichero));
-					BufferedReader ficheroEquipos = new BufferedReader(new FileReader("ficheros/equipos.txt"));
-
-					
-					String registro;
-					String registroEquipos;
-					int contador =0;
-					int puntosL;
-					int puntosV;
-					
-												
-						while ((registro = fichero.readLine()) != null) {
-							String [] campos = registro.split("#");
-							if (campos[3].equals("")) {
-								break;
-							}
-							
-							//Declaracion e inicializacion ArrayList a 0,0,0 
-							registroEquipos = ficheroEquipos.readLine();
-							String [] camposEquipos = registro.split("#");
-							
-							for (int i = 2; i <=4; i+=2) {
-								if (!mapaEquipos.containsKey(campos[i])) { 
-									while(!campos[i].equals(camposEquipos[2]) ) {
-										String nombreEquipoLargo = camposEquipos[2];
-									}
-									mapaEquipos.put(campos[i], new ArrayList<Integer>(Arrays.asList(0,0,0))); //asList permite inicializar un arrayList
-								}
-							}
-								
-							// Saber  VICTORIA / EMPATE / DERROTA y recoger el valor
-							
-								ArrayList<Integer> equipoLocal = mapaEquipos.get(campos[2]); // devuelve valor de la clave
-								ArrayList<Integer> equipoVisitante = mapaEquipos.get(campos[4]);
-
-								
-/*							
-								// Gana equipoLocal
-								if(campos[3].compareTo(campos[5]) >0) {
-									puntosL = equipoLocal.get(0);
-									equipoLocal.set(0, puntosL + 1);
-									
-									puntosV = equipoVisitante.get(2);
-									equipoVisitante.set(2, puntosV + 1);
-									
-									
-								// Gana equipoVisitante	
-								}
-								if (campos[3].compareTo(campos[5]) < 0) {
-									puntosV = equipoVisitante.get(0);
-									equipoVisitante.set(0, puntosV + 1);
-									
-									puntosL = equipoLocal.get(2);
-									equipoLocal.set(2, puntosL + 1);
-									
-								}
-								// Empate
-								if(campos[3].equals(campos[5])){
-									//Especificar la clave para añadir el nuevo valor del arrayList a cada una de ellas
-									puntosL = equipoLocal.get(1);    // get: devuelve valor de la posicon 1 arrayList('empate') 
-									equipoLocal.set(1,puntosL+1);       //(1 : indice posicion , 1: incrementa en uno)
-									
-									puntosV = equipoVisitante.get(1);
-									equipoVisitante.set(1,puntosV+1);
-								}*/
-						}
-
-					
-					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
-					for(String clave : clavesMapa) {
-						System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
-					}
-					
-					fichero.close();
-					System.out.println("Fin de la lectura del fichero");
-					return mapaEquipos;
-					
-						}catch (FileNotFoundException excepcion) {
-							System.out.println("fichero no encontrado");
-							}catch (IOException e){
-								System.out.println("IO Excepcion");
-							}
-							return null;
-			}	
-			
-			
-			
 			// --------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo --------------------------------- 07/02/2019
 			/*
 			 * Mostrar:
@@ -1559,14 +1469,140 @@ public class Ejercicios {
 			 * - goles en contra
 			 * 
 			 */
-			public HashMap<String, ArrayList<Integer>> creaClasificacion(String rutaFicheroPartidos){
-				
-				
-				return null;
-			}
 			
-			
-			
+			// FALTA LLAMARLO CON METODO ORDENE Y PT
+			public HashMap<String, ArrayList<Integer>> creaClasificacion(String rutaFichero) {
+				try {
+
+					HashMap<String, ArrayList<Integer>> mapaEquipos = new HashMap<String,ArrayList<Integer>>();  
+					BufferedReader fichero = new BufferedReader(new FileReader(rutaFichero));
+
+					// HashMap de otro método ( nos facilita el nombre corto/largo) 
+					HashMap<String, Equipo> mapNombreEquipos = crearMapaEquipos("ficheros/equipos.txt");
+					
+					
+					String registro;
+					int contador =0;
+					int puntosL;
+					int puntosV;
+					int partidosJ;
+					int golesFavor;
+					int golesContra = 0;
+					
+												
+						while ((registro = fichero.readLine()) != null) {
+							String [] campos = registro.split("#");
+							if (campos[3].equals("")) {
+								break;
+							}
+							
+							//Declaracion e inicializacion ArrayList a 0,0,0 
+							for (int i = 2; i <=4; i+=2) {
+								if (!mapaEquipos.containsKey(mapNombreEquipos.get(campos[i]).getNombre())) { // MODIFICAR ESTA LINEA
+									Equipo nombreEquipoObjCompleto = mapNombreEquipos.get(campos[i]);
+									String nombreEquipoComp = nombreEquipoObjCompleto.getNombre();  
+									mapaEquipos.put(nombreEquipoComp, new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0)));
+								}
+							}
+								
+							// Saber  VICTORIA / EMPATE / DERROTA y recoger el valor
+							
+							ArrayList<Integer> equipoLocal = mapaEquipos.get(mapNombreEquipos.get(campos[2]).getNombre()); // devuelve valor de la clave
+							ArrayList<Integer> equipoVisitante = mapaEquipos.get(mapNombreEquipos.get(campos[4]).getNombre());
+								
+
+								// Gana equipoLocal
+							if(campos[3].compareTo(campos[5]) >0) {
+								puntosL = equipoLocal.get(2);
+								equipoLocal.set(2, puntosL + 1);
+								partidosJ= equipoLocal.get(1);
+								equipoLocal.set(1, partidosJ + 1);
+								golesFavor = equipoLocal.get(5);
+								equipoLocal.set(5, Integer.parseInt(campos[3]) + golesFavor);
+								
+								golesContra = equipoLocal.get(6);
+								equipoLocal.set(6, golesContra + Integer.parseInt(campos[5]));
+								
+								
+								puntosV = equipoVisitante.get(4);
+								equipoVisitante.set(4, puntosV + 1);
+								partidosJ= equipoVisitante.get(1);
+								equipoVisitante.set(1, partidosJ + 1);
+								golesFavor = equipoVisitante.get(5);
+								equipoVisitante.set(5, Integer.parseInt(campos[5]) + golesFavor);
+								
+								golesContra = equipoVisitante.get(6);
+								equipoVisitante.set(6, golesContra + Integer.parseInt(campos[3]));
+								
+
+							}
+								// Gana equipoVisitante	
+							if (campos[3].compareTo(campos[5]) < 0) {
+								puntosV = equipoVisitante.get(2);
+								equipoVisitante.set(2, puntosV + 1);
+								partidosJ= equipoVisitante.get(1);
+								equipoVisitante.set(1, partidosJ + 1);
+								golesFavor = equipoVisitante.get(5);
+								equipoVisitante.set(5, Integer.parseInt(campos[5]) + golesFavor);
+								
+								golesContra = equipoVisitante.get(6);
+								equipoVisitante.set(6, golesContra + Integer.parseInt(campos[3]));
+								
+	
+								puntosL = equipoLocal.get(4);
+								equipoLocal.set(4, puntosL + 1);
+								partidosJ= equipoLocal.get(1);
+								equipoLocal.set(1, partidosJ + 1);
+								golesFavor = equipoLocal.get(5);
+								equipoLocal.set(5, Integer.parseInt(campos[3]) + golesFavor);
+								
+								golesContra = equipoLocal.get(6);
+								equipoLocal.set(6, golesContra + Integer.parseInt(campos[5]));
+							}
+							
+							// Empate
+							if(campos[3].equals(campos[5])){
+							//Especificar la clave para añadir el nuevo valor del arrayList a cada una de ellas
+								puntosL = equipoLocal.get(3);    // get: devuelve valor de la posicon 1 arrayList('empate') 
+								equipoLocal.set(3,puntosL+1);       //(1 : indice posicion , 1: incrementa en uno)
+								partidosJ= equipoLocal.get(1);
+								equipoLocal.set(1, partidosJ + 1);
+								golesFavor = equipoLocal.get(5);
+								equipoLocal.set(5, Integer.parseInt(campos[3]) + golesFavor);
+								
+								golesContra = equipoLocal.get(6);
+								equipoLocal.set(6, golesContra + Integer.parseInt(campos[5]));
+								
+								
+								puntosV = equipoVisitante.get(3);
+								equipoVisitante.set(3,puntosV+1);
+								partidosJ= equipoVisitante.get(1);
+								equipoVisitante.set(1, partidosJ + 1);
+								golesFavor = equipoVisitante.get(5);
+								equipoVisitante.set(5, Integer.parseInt(campos[5]) + golesFavor);
+								
+								golesContra = equipoVisitante.get(6);
+								equipoVisitante.set(6, golesContra + Integer.parseInt(campos[3]));
+							}
+						}
+
+					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
+					for(String clave : clavesMapa) {
+						System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
+					}
+					
+					fichero.close();
+					System.out.println("Fin de la lectura del fichero");
+					return mapaEquipos;
+					
+				}catch (FileNotFoundException excepcion) {
+					System.out.println("fichero no encontrado");
+				}catch (IOException e){
+					System.out.println("IO Excepcion");
+				}
+					return null;
+			}	
+
 			
 			
 			
@@ -1576,11 +1612,12 @@ public class Ejercicios {
 
 		
 		
-		
-		HashMap<String, ArrayList<Integer>> resultados = ejercicios.resultadosEquipos("ficheros/partidos.txt");
-		HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultados);  // 05/02/2019
-		ejercicios.ordenarMapaPuntosEquipos(puntosEquipos);
-		ejercicios.creaClasificacion("ficheros/partidos.txt");
+		//ejercicios.crearMapaEquipos("ficheros/equipos.txt");
+		//ejercicios.creaListaEquipos("ficheros/equipos.txt");
+		HashMap<String, ArrayList<Integer>> resultados = ejercicios.creaClasificacion("ficheros/partidos.txt");
+		//HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultados);  // 05/02/2019
+		//ejercicios.ordenarMapaPuntosEquipos(puntosEquipos);
+
 		
 	
 		//ArrayList<Equipo> eqOrdenado = ejercicios.equiposListaOrdenadaNombre("ficheros/equipos.txt");
@@ -1591,17 +1628,6 @@ public class Ejercicios {
 		//HashMap<String, Integer> equipos = ejercicios.comprobarPartidos("ficheros/partidos.txt");
 
 
-		/*
-		
-		int matrizNum[][]= {
-				{5,4,8},
-				{7,2,3,4},
-				{8,5}
-		};		
-		
-		Ejercicios ejercicios = new Ejercicios();
-		ejercicios.sumaColumnasMatrizHeterogenea(matrizNum);*/
-				
 		
 
 	//	Persona juan = new Persona();
@@ -1619,6 +1645,7 @@ public class Ejercicios {
 		
 /*	
  		// 07/02/2019--------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo ---------------------------------
+ 		
  		
  		
  		
