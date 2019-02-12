@@ -1375,7 +1375,7 @@ public class Ejercicios {
 				HashMap<String, Integer> resultado = new HashMap<String,Integer>();
 				for (String clave : mapaPartidosGEP.keySet()) {
 					ArrayList<Integer> datos = mapaPartidosGEP.get(clave);
-					int puntos = datos.get(0)*3 + datos.get(1);
+					int puntos = datos.get(2)*3 + datos.get(3);  // Modificado para el método creaClasificacion
 					resultado.put(clave, puntos);
 					//System.out.println(clave + " -> "  +puntos);
 				}
@@ -1456,7 +1456,6 @@ public class Ejercicios {
 			}
 
 
-			
 
 			
 			
@@ -1470,7 +1469,7 @@ public class Ejercicios {
 			 * 
 			 */
 			
-			// FALTA LLAMARLO CON METODO ORDENE Y PT
+			// FALTA  PT
 			public HashMap<String, ArrayList<Integer>> creaClasificacion(String rutaFichero) {
 				try {
 
@@ -1498,7 +1497,7 @@ public class Ejercicios {
 							
 							//Declaracion e inicializacion ArrayList a 0,0,0 
 							for (int i = 2; i <=4; i+=2) {
-								if (!mapaEquipos.containsKey(mapNombreEquipos.get(campos[i]).getNombre())) { // MODIFICAR ESTA LINEA
+								if (!mapaEquipos.containsKey(mapNombreEquipos.get(campos[i]).getNombre())) { 
 									Equipo nombreEquipoObjCompleto = mapNombreEquipos.get(campos[i]);
 									String nombreEquipoComp = nombreEquipoObjCompleto.getNombre();  
 									mapaEquipos.put(nombreEquipoComp, new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0)));
@@ -1513,10 +1512,20 @@ public class Ejercicios {
 
 								// Gana equipoLocal
 							if(campos[3].compareTo(campos[5]) >0) {
-								puntosL = equipoLocal.get(2);
-								equipoLocal.set(2, puntosL + 1);
-								partidosJ= equipoLocal.get(1);
-								equipoLocal.set(1, partidosJ + 1);
+								/*puntosL = equipoLocal.get(2);
+								equipoLocal.set(2, puntosL + 1);*/
+								
+								equipoLocal.set(2, equipoLocal.get(2) + 1);
+								
+								
+								/*partidosJ= equipoLocal.get(1);
+								equipoLocal.set(1, partidosJ + 1);*/
+								
+								equipoLocal.set(1, equipoLocal.get(1)+1);
+								
+								
+								
+								
 								golesFavor = equipoLocal.get(5);
 								equipoLocal.set(5, Integer.parseInt(campos[3]) + golesFavor);
 								
@@ -1588,7 +1597,7 @@ public class Ejercicios {
 
 					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
 					for(String clave : clavesMapa) {
-						System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
+						//System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
 					}
 					
 					fichero.close();
@@ -1603,6 +1612,30 @@ public class Ejercicios {
 					return null;
 			}	
 
+		
+			
+			// --------ACTIVIDAD: Ordenar HashMap de clasificacion   --------------------------------- 12/02/2019
+			public void ordenarMapaPuntosEquipos2(HashMap<String,ArrayList<Integer>> mapaPuntosEquipos){
+				
+				Set<Entry<String, ArrayList<Integer>>> set = mapaPuntosEquipos.entrySet();   // entrySet --> Vista conjunta del mapa
+		        List<Entry<String, ArrayList<Integer>>> list = new ArrayList<Entry<String, ArrayList<Integer>>>(set);
+		        Collections.sort( list, new Comparator<Map.Entry<String, ArrayList<Integer>>>(){
+		            public int compare( Map.Entry<String, ArrayList<Integer>> o1, Map.Entry<String, ArrayList<Integer>> o2 ){
+		            	//return (o2.getValue()).compareTo( o1.getValue() );
+		            	return (o2.getValue().get(2).compareTo(o1.getValue().get(2)));
+		            }
+		        } );
+		        for(Map.Entry<String, ArrayList<Integer>> entry:list){
+		            System.out.println(entry.getKey()+" ==== "+entry.getValue());
+		        }
+			}	
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -1614,8 +1647,12 @@ public class Ejercicios {
 		
 		//ejercicios.crearMapaEquipos("ficheros/equipos.txt");
 		//ejercicios.creaListaEquipos("ficheros/equipos.txt");
+		
 		HashMap<String, ArrayList<Integer>> resultados = ejercicios.creaClasificacion("ficheros/partidos.txt");
+		ejercicios.ordenarMapaPuntosEquipos2(resultados);
+		
 		//HashMap<String, Integer> puntosEquipos = ejercicios.generaPuntosEquipos(resultados);  // 05/02/2019
+		
 		//ejercicios.ordenarMapaPuntosEquipos(puntosEquipos);
 
 		
@@ -1643,9 +1680,24 @@ public class Ejercicios {
 		
 		
 		
+		
+		
+		
+		
+		
 /*	
+ 
+ 
+ 
+ 		// 12/02/2019--------ACTIVIDAD: Ordenar HashMap de clasificacion   --------------------------------- 
+ 		HashMap<String, ArrayList<Integer>> resultados = ejercicios.creaClasificacion("ficheros/partidos.txt");
+		ejercicios.ordenarMapaPuntosEquipos2(resultados);
+ 
+ 
+ 
  		// 07/02/2019--------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo ---------------------------------
- 		
+ 		HashMap<String, ArrayList<Integer>> resultados = ejercicios.creaClasificacion("ficheros/partidos.txt");
+		ejercicios.ordenarMapaPuntosEquipos2(resultados);
  		
  		
  		
