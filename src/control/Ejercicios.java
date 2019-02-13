@@ -1469,8 +1469,6 @@ public class Ejercicios {
 			 * - goles en contra
 			 * 
 			 */
-			
-			// FALTA  PT
 			public HashMap<String, ArrayList<Integer>> creaClasificacion(String rutaFichero) {
 				try {
 
@@ -1595,8 +1593,9 @@ public class Ejercicios {
 						}
 
 					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
-					for(String clave : clavesMapa) {
-						
+					for(String clave : mapaEquipos.keySet()) {
+						ArrayList<Integer> datos = mapaEquipos.get(clave);
+  						datos.set(0, datos.get(2)*3 + datos.get(3));
 						//System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
 					}
 					
