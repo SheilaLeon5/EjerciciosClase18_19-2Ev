@@ -6,6 +6,13 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 	private String nombre;
 	
 	
+	private int pg;
+	private int pe;
+	private int pp;
+	private int gf;
+	private int gc;
+	
+	
 	public Equipo() {
 		//Constructor vacío
 	}
@@ -76,4 +83,58 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}	
+	
+	public int getPg() {
+		return pg;
+	}
+
+
+	public int getPe() {
+		return pe;
+	}
+
+
+	public int getPp() {
+		return pp;
+	}
+
+
+	public int getGf() {
+		return gf;
+	}
+
+
+	public int getGc() {
+		return gc;
+	}
+
+
+	public void setPg(int pg) {
+		this.pg = pg;
+	}
+
+
+	public void setPe(int pe) {
+		this.pe = pe;
+	}
+
+
+	public void setPp(int pp) {
+		this.pp = pp;
+	}
+
+
+	public void setGf(int gf) {
+		this.gf = gf;
+	}
+
+
+	public void setGc(int gc) {
+		this.gc = gc;
+	}
+
+
+
+	
+	
 }

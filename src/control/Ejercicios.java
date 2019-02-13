@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 
 import modelo.Equipo;
 import modelo.Estudiante;
+import modelo.Partido;
 import modelo.Persona;
 
 /**
@@ -1020,7 +1021,7 @@ public class Ejercicios {
 			
 			
 			
-			// --------ACTIVIDAD: Obtener un ArrayList de todos los equipos  ------------------------------------------------------- 23/01/2019
+			/*// --------ACTIVIDAD: Obtener un ArrayList de todos los equipos  ------------------------------------------------------- 23/01/2019
 			
 			public ArrayList<Equipo> creaListaEquipos(String rutaFichero){
 					try {
@@ -1054,7 +1055,7 @@ public class Ejercicios {
 					}
 					return null;		
 
-			}
+			}*/
 			
 			
 			
@@ -1515,8 +1516,6 @@ public class Ejercicios {
 
 								// Gana equipoLocal
 							if(campos[3].compareTo(campos[5]) >0) {
-								
-								//equipoLocal.set(0, equipoLocal.get(2)*3 + equipoLocal.get(3)*1);
 								puntosL = equipoLocal.get(2);
 								equipoLocal.set(2, puntosL + 1);
 								partidosJ= equipoLocal.get(1);
@@ -1527,7 +1526,10 @@ public class Ejercicios {
 								golesContra = equipoLocal.get(6);
 								equipoLocal.set(6, golesContra + Integer.parseInt(campos[5]));
 								
-								//equipoVisitante.set(0, equipoLocal.get(2)*3 + equipoLocal.get(3)*1);
+								
+								
+								
+								
 								puntosV = equipoVisitante.get(4);
 								equipoVisitante.set(4, puntosV + 1);
 								partidosJ= equipoVisitante.get(1);
@@ -1541,7 +1543,6 @@ public class Ejercicios {
 							
 								// Gana equipoVisitante	
 							if (campos[3].compareTo(campos[5]) < 0) {
-								//equipoVisitante.set(0, equipoLocal.get(2)*3 + equipoLocal.get(3)*1);
 								puntosV = equipoVisitante.get(2);
 								equipoVisitante.set(2, puntosV + 1);
 								partidosJ= equipoVisitante.get(1);
@@ -1553,7 +1554,7 @@ public class Ejercicios {
 								equipoVisitante.set(6, golesContra + Integer.parseInt(campos[3]));
 								
 								
-								//equipoLocal.set(0, equipoLocal.get(2)*3 + equipoLocal.get(3)*1);
+
 								puntosL = equipoLocal.get(4);
 								equipoLocal.set(4, puntosL + 1);
 								partidosJ= equipoLocal.get(1);
@@ -1568,7 +1569,7 @@ public class Ejercicios {
 							// Empate
 							if(campos[3].equals(campos[5])){
 							//Especificar la clave para añadir el nuevo valor del arrayList a cada una de ellas
-								//equipoLocal.set(0, equipoLocal.get(2)*3 + equipoLocal.get(3)*1);
+
 								puntosL = equipoLocal.get(3);    // get: devuelve valor de la posicon 1 arrayList('empate') 
 								equipoLocal.set(3,puntosL+1);       //(1 : indice posicion , 1: incrementa en uno)
 								partidosJ= equipoLocal.get(1);
@@ -1580,7 +1581,7 @@ public class Ejercicios {
 								equipoLocal.set(6, golesContra + Integer.parseInt(campos[5]));
 								
 								
-								//equipoVisitante.set(0, equipoLocal.get(2)*3 + equipoLocal.get(3)*1);
+
 								puntosV = equipoVisitante.get(3);
 								equipoVisitante.set(3,puntosV+1);
 								partidosJ= equipoVisitante.get(1);
@@ -1595,6 +1596,7 @@ public class Ejercicios {
 
 					Set<String> clavesMapa = mapaEquipos.keySet(); // Devuelve las claves del mapa
 					for(String clave : clavesMapa) {
+						
 						//System.out.println(contador++ + ".- " +  clave + mapaEquipos.get(clave)); //  get: Devuelve el valor de la clave especificada
 					}
 					
@@ -1631,7 +1633,155 @@ public class Ejercicios {
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			public Partido creaPartido (String lineaFichero) {
+				Partido partido = new Partido();
+				String[] campos = lineaFichero.split("#");
+				
+				partido.setEquipoLocal(campos[2]);
+				partido.setEquipoVisitante(campos[4]);
+				partido.setIdPartido(Integer.parseInt(campos[0]));
+				partido.setJornada(Integer.parseInt(campos[1]));
+
+				partido.setIdPartido(Integer.parseInt(campos[3]));
+				partido.setIdPartido(Integer.parseInt(campos[5]));
+			
+				return partido;
+			}
+			
+			public void actualizaEquipos(Partido partido, ArrayList<Equipo> equipos) {
+/*				if (!equipos.containsKey(eL))
+					equipos.put(eL, new ArrayList<Integer>(Arrays.asList(0, 0, 0)));
+
+				if (!equipos.containsKey(eV))
+					equipos.put(eV, new ArrayList<Integer>(Arrays.asList(0, 0, 0)));
+
+			// cual fue el resultado ..?
+
+				if (gL.compareTo(gV) > 0) {// gana Local
+					equipos.get(eL).set(0, equipos.get(eL).get(0) + 1);
+					equipos.get(eV).set(2, equipos.get(eV).get(2) + 1);
+
+				} else if (gL.compareTo(gV) < 0) { // gana Visitante
+					
+				// gana Local
+					equipos.get(eL).set(2, equipos.get(eL).get(2) + 1);
+					equipos.get(eV).set(0, equipos.get(eV).get(0) + 1);
+				} else { // empate
+
+				equipos.get(eL).set(1, equipos.get(eL).get(1) + 1);
+				equipos.get(eV).set(1, equipos.get(eV).get(1) + 1);
+				}
+*/				
+			}
+			
+			
+			
+			
+			
+			// --------ACTIVIDAD: Obtener un ArrayList de todos los equipos (MODIFICADO PARA EL MÉTODO: generaClasificacion  ------------------------------------------------------- 13/02/2019
+			
+						public ArrayList<Equipo> creaListaEquipos(String rutaFichero){
+								try {
+									BufferedReader fichero;
+									fichero = new BufferedReader(new FileReader(rutaFichero));
+									
+									String registro ;
+									Equipo equipo;
+									
+									ArrayList<Equipo> listaNombreEquipos;
+									listaNombreEquipos = new ArrayList<Equipo>();
+									
+									
+									while ((registro =fichero.readLine() ) != null) {
+										String [] campos = registro.split("#");
+										equipo = new Equipo(Integer.parseInt(campos[0]), campos[1], campos[2]);
+										equipo.setGc(0);
+										equipo.setGf(0);
+										equipo.setPe(0);
+										equipo.setPg(0);
+										equipo.setPp(0);
+										listaNombreEquipos.add(equipo);
+									}
+									
+									System.out.println(listaNombreEquipos);
+									
+									fichero.close();
+									System.out.println("Fin de la lectura del fichero");
+									return listaNombreEquipos;
+									
+								} catch (FileNotFoundException excepcion) {
+									System.out.println("fichero no encontrado");
+
+								} catch (IOException e) {
+									System.out.println("IO Excepcion");
+								}
+								return null;		
+
+						}	
+			// --------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo (MEDIANTE CLASE EQUIPO)  --------------------------------- 13/02/2019
+			/*
+			 * Hemos modificado un método (Método anterior: creaListaEquipos) que ya teniamos para realizar este método.
+			 */
+						
+				public ArrayList<Equipo> generaClasificacion (String rutaPartidos){
+				try {
+					ArrayList<Equipo> resultado = creaListaEquipos(rutaPartidos);
+
+					BufferedReader fichero;
+					fichero = new BufferedReader(new FileReader(rutaPartidos));
+					String registro;
+					Partido partido;
+					while ((registro = fichero.readLine()) != null) {
+						 partido = creaPartido(registro);
+						 if (partido == null)
+							 break;
+
+						 // Actualiza lista Equipos
+						 
+//						 actualizaEquipos (partido, equipos);
+					}
+					fichero.close();
+					System.out.println("Fin de la lectura del fichero");
+					return resultado;
+
+				} catch (FileNotFoundException excepcion) {
+					System.out.println("fichero no encontrado");
+
+				} catch (IOException e) {
+					System.out.println("IO Excepcion");
+				}
+				return null;
+			}
+			
 	
+			
+			
+	
+			
+			
+			
+			
+			
+			
 			
 			
 	public static void main(String[]args) {
@@ -1682,6 +1832,9 @@ public class Ejercicios {
 		
 		
 /*	
+ 		// 13/02/2019--------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo (MEDIANTE CLASE EQUIPO)  --------------------------------- 
+ 
+ 
  
  
  
