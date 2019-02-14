@@ -6,6 +6,7 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 	private String nombre;
 	
 	
+	private int puntos;
 	private int pg;
 	private int pe;
 	private int pp;
@@ -108,7 +109,10 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 		return gc;
 	}
 
-
+	public int getPuntos() {
+		return puntos;
+	}
+	
 	public void setPg(int pg) {
 		this.pg = pg;
 	}
@@ -131,6 +135,11 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 
 	public void setGc(int gc) {
 		this.gc = gc;
+	}
+
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
 	}
 
 

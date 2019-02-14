@@ -1655,18 +1655,60 @@ public class Ejercicios {
 				Partido partido = new Partido();
 				String[] campos = lineaFichero.split("#");
 				
-				partido.setEquipoLocal(campos[2]);
-				partido.setEquipoVisitante(campos[4]);
+				
 				partido.setIdPartido(Integer.parseInt(campos[0]));
 				partido.setJornada(Integer.parseInt(campos[1]));
-
-				partido.setIdPartido(Integer.parseInt(campos[3]));
-				partido.setIdPartido(Integer.parseInt(campos[5]));
-			
+				partido.setEquipoLocal(campos[2]);
+				partido.setEquipoVisitante(campos[4]);
+				
+				
+				try {
+					partido.setGolesLocal(Integer.parseInt(campos[3]));
+					partido.setGolesVisitante(Integer.parseInt(campos[5]));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					return null;
+				}
 				return partido;
 			}
 			
+			
+			
+			public Equipo buscarEquipoEnLista(String nombreCorto, ArrayList<Equipo> equipos) {   
+				Equipo resultado = null;
+				for (Equipo equipo : equipos) {
+					if(equipo.getNombre().equals(nombreCorto)) {
+						return equipo;
+					}
+				}
+				System.out.println("Oooops.. algo falla");
+				return null;
+			}
+			
+			
 			public void actualizaEquipos(Partido partido, ArrayList<Equipo> equipos) {
+				String nCortoL = partido.getEquipoLocal();
+				String nCortoV = partido.getEquipoVisitante();
+				Equipo eL= buscarEquipoEnLista(nCortoL, equipos);
+				Equipo eV=buscarEquipoEnLista(nCortoV, equipos);
+				
+				if (partido.getGolesLocal() > partido.getGolesVisitante()) {
+					eL.setPuntos(eL.getPuntos() + 3);
+					eL.setPg(eL.getPg() + 1);
+					eV.setPp(eV.getPp() + 1);
+					//eL.setGf(eL.get);
+
+				}else if (partido.getGolesLocal() < partido.getGolesVisitante()){
+					eV.setPuntos(eV.getPuntos() + 3);
+					eV.setPg(eV.getPg() + 1);
+					eL.setPp(eL.getPp() + 1);
+				}else {
+					eL.setPuntos(eL.getPuntos() + 1);
+					eV.setPuntos(eV.getPuntos() + 1);
+					eL.setPe(eL.getPe() + 1);
+					eV.setPe(eV.getPe() + 1);
+				}
+				
 /*				if (!equipos.containsKey(eL))
 					equipos.put(eL, new ArrayList<Integer>(Arrays.asList(0, 0, 0)));
 
@@ -1718,6 +1760,7 @@ public class Ejercicios {
 										equipo.setPe(0);
 										equipo.setPg(0);
 										equipo.setPp(0);
+										equipo.setPuntos(0);
 										listaNombreEquipos.add(equipo);
 									}
 									
@@ -1742,8 +1785,9 @@ public class Ejercicios {
 			 */
 						
 				public ArrayList<Equipo> generaClasificacion (String rutaPartidos){
+					ArrayList<Equipo> resultado; 
 				try {
-					ArrayList<Equipo> resultado = creaListaEquipos(rutaPartidos);
+					resultado = creaListaEquipos(rutaPartidos);
 
 					BufferedReader fichero;
 					fichero = new BufferedReader(new FileReader(rutaPartidos));
@@ -1756,7 +1800,7 @@ public class Ejercicios {
 
 						 // Actualiza lista Equipos
 						 
-//						 actualizaEquipos (partido, equipos);
+						 actualizaEquipos (partido, resultado);
 					}
 					fichero.close();
 					System.out.println("Fin de la lectura del fichero");
