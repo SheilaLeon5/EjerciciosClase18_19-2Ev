@@ -1686,6 +1686,7 @@ public class Ejercicios {
 			}
 			
 			
+			
 			public void actualizaEquipos(Partido partido, ArrayList<Equipo> equipos) {
 				String nCortoL = partido.getEquipoLocal();
 				String nCortoV = partido.getEquipoVisitante();
@@ -1697,6 +1698,7 @@ public class Ejercicios {
 					eL.setPg(eL.getPg() + 1);
 					eV.setPp(eV.getPp() + 1);
 					//eL.setGf(eL.get);
+					//eL.setGf(eL.getGf() + partido.getGolesLocal()); 
 
 				}else if (partido.getGolesLocal() < partido.getGolesVisitante()){
 					eV.setPuntos(eV.getPuntos() + 3);
