@@ -1,12 +1,13 @@
 package modelo;
 
-public class Equipo /*implements Comparable<Equipo>*/ {
+public class Equipo implements Comparable<Equipo> {
 	private int idEquipo;
 	private String nombreCorto;
 	private String nombre;
 	
 	
 	private int puntos;
+	private int pj;
 	private int pg;
 	private int pe;
 	private int pp;
@@ -34,6 +35,7 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 	public String toString() {
 		return this.nombre;
 	}
+	
 
 /*		
 	// 06/02/2018
@@ -49,13 +51,27 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 			return 0;
 		}
 	}
-	
-
-	
-	
-	
 	*/
 
+	@Override
+	public int compareTo(Equipo eq) {
+		if (this.getPuntos() > eq.getPuntos())
+			return -1;
+		if (this.getPuntos() < eq.getPuntos())
+			return 1;
+		if((this.getGf() - this.getGc()) > (eq.getGf() - eq.getGc()))
+			return -1;
+		if((this.getGf() - this.getGc()) < (eq.getGf() - eq.getGc()))
+			return 1;
+		if (this.getGf() > eq.getGf())
+			return -1;
+		return -1;
+	}
+	
+	
+	
+	
+	
 	public int getIdEquipo() {
 		return idEquipo;
 	}
@@ -141,6 +157,19 @@ public class Equipo /*implements Comparable<Equipo>*/ {
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
+
+
+	public int getPj() {
+		return pj;
+	}
+
+
+	public void setPj(int pj) {
+		this.pj = pj;
+	}
+
+
+
 
 
 

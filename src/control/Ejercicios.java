@@ -22,11 +22,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 import modelo.Equipo;
 import modelo.Estudiante;
@@ -1666,6 +1668,7 @@ public class Ejercicios {
 						while ((registro = fichero.readLine() ) != null) {
 							String [] campos = registro.split("#");
 							equipo = new Equipo(Integer.parseInt(campos[0]), campos[1], campos[2]);
+							equipo.setPj(0);
 							equipo.setGc(0);  // contenido es 0
 							equipo.setGf(0);
 							equipo.setPe(0);
@@ -1688,7 +1691,6 @@ public class Ejercicios {
 						System.out.println("IO Excepcion");
 					}
 					return null;		
-
 			}
 			
 			public Partido creaPartido (String lineaFichero) {
@@ -1732,34 +1734,27 @@ public class Ejercicios {
 					eL.setPuntos(eL.getPuntos() + 3);
 					eL.setPg(eL.getPg() + 1);
 					eV.setPp(eV.getPp() + 1);
-					eL.setGf(eL.getGf() + partido.getGolesLocal());
-					eL.setGc(eL.getGc()+ partido.getGolesVisitante());
-					eV.setGf(eV.getGf() + partido.getGolesVisitante());
-					eV.setGc(eV.getGc() + partido.getGolesLocal());
+
 
 				}else if (partido.getGolesLocal() < partido.getGolesVisitante()){
 					eV.setPuntos(eV.getPuntos() + 3);
 					eV.setPg(eV.getPg() + 1);
 					eL.setPp(eL.getPp() + 1);
-					eV.setGf(eL.getGf() + partido.getGolesVisitante());
-					eV.setGc(eV.getGc() + partido.getGolesLocal());
-					eL.setGf(eL.getGf() + partido.getGolesLocal());
-					eL.setGc(eL.getGc() + partido.getGolesVisitante());
+
 					
 				}else {
 					eL.setPuntos(eL.getPuntos() + 1);
 					eV.setPuntos(eV.getPuntos() + 1);
 					eL.setPe(eL.getPe() + 1);
 					eV.setPe(eV.getPe() + 1);
-					eL.setGf(eL.getGf() + partido.getGolesLocal());
-					eL.setGc(eL.getGc() + partido.getGolesVisitante());
-					eV.setGf(eV.getGf() + partido.getGolesVisitante());
-					eV.setGc(eV.getGc() + partido.getGolesLocal());
 				}
 				
-/*				for (Equipo equipo : equipos) {
-					
-				}*/
+				eL.setGf(eL.getGf() + partido.getGolesLocal());
+				eL.setGc(eL.getGc()+ partido.getGolesVisitante());
+				eV.setGf(eV.getGf() + partido.getGolesVisitante());
+				eV.setGc(eV.getGc() + partido.getGolesLocal());
+				eL.setPj(eL.getPj() + 1);
+				eV.setPj(eV.getPj() + 1);
 			}						
 
 						
@@ -1770,7 +1765,7 @@ public class Ejercicios {
 			 * Para este método hemos creado submétodos: actualizaEquipos,creaListaEquipos,buscarEquipoEnLista,creaPartido
 			 */
 						
-				public ArrayList<Equipo> generaClasificacion (String rutaPartidos){
+				public ArrayList<Equipo> generaClasificacion (String rutaPartidos, String rutaEquipos){
 					ArrayList<Equipo> resultado; 
 				try {
 					resultado = creaListaEquipos(rutaPartidos);
@@ -1783,11 +1778,11 @@ public class Ejercicios {
 						 partido = creaPartido(registro);
 						 if (partido == null)
 							 break;
-
 						 // Actualiza lista Equipos
-						 
-						 actualizaEquipos (partido, resultado);
+						 actualizaEquipos (partido, resultado); 
 					}
+					Collections.sort(resultado, null);
+					
 					fichero.close();
 					System.out.println("Fin de la lectura del fichero");
 					return resultado;
@@ -1799,16 +1794,32 @@ public class Ejercicios {
 					System.out.println("IO Excepcion");
 				}
 				return null;
-			}
-
-	
+			}	
 			
+/*				// --------ACTIVIDAD: Mostrar clasificación en un recuadro con SWING--------------------------------- 19/02/2019
+				
+				public void muestraClasificacion() {
+					JFrame ventana;
+					ventana = new JFrame("Mi primer SWING");
+					JButton boton= new JButton("Pulsame!");
+					JPanel panel = new JPanel();
+					ventana.add(panel);
+					
+					
+					ArrayList<Equipo> clasificacion = this.generaClasificacion("ficheros/equipos.txt","ficheros/partidos.txt");
+					
+					String[] columnas= {"EQUIPO","PJ","PG","PE","PP","GF","GC"};
+					ArrayList<ArrayList<Object>> datos = new ArrayList<>();
+					ArrayList equipo = new ArrayList<>();
+					
+					
+					
+					//DefaultTableModel modelo = new DefaultTableModel(columnas,clasificacion.size());
+					ventana.pack();
+					ventana.setVisible(true);
+				}
 			
-	
-			
-			
-			
-			
+*/
 			
 			
 			
@@ -1816,7 +1827,9 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		ejercicios.generaClasificacion("ficheros/partidos.txt");
+		 ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
+		 
+		 System.out.println("fin");
 
 		
 		
@@ -1854,7 +1867,7 @@ public class Ejercicios {
 		
 		
 		
-		
+		// PROGRAMA: scene builder
 		
 		
 		
@@ -1863,9 +1876,14 @@ public class Ejercicios {
 		
 		
 /*	
+ 
+ 
+ 
+ 
  		// 13/02/2019--------ACTIVIDAD: Crearemos la clasificacion con información extra de cada equipo (MEDIANTE CLASE EQUIPO)  --------------------------------- 
- 
- 
+ 		// Hemos realizado pequeños métodos (buscarEquipoEnLista,creaPartido,) para el método "generaClasificacion"
+ 		Ejercicios ejercicios = new Ejercicios();
+		ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
  
  
  
