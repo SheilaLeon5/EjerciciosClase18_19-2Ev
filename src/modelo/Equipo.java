@@ -1,6 +1,8 @@
 package modelo;
 
-public class Equipo implements Comparable<Equipo> {
+import java.io.Serializable;
+
+public class Equipo implements Serializable /*Comparable<Equipo>*/ {
 	private int idEquipo;
 	private String nombreCorto;
 	private String nombre;
@@ -53,7 +55,7 @@ public class Equipo implements Comparable<Equipo> {
 	}
 	*/
 
-	@Override
+/*	@Override
 	public int compareTo(Equipo eq) {
 		if (this.getPuntos() > eq.getPuntos())
 			return -1;
@@ -67,7 +69,7 @@ public class Equipo implements Comparable<Equipo> {
 			return -1;
 		return -1;
 	}
-	
+	*/
 	
 	
 	

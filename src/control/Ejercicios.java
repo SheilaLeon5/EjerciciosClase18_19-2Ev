@@ -4,10 +4,15 @@ package control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 
@@ -21,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
 
@@ -1716,7 +1722,7 @@ public class Ejercicios {
 			public Equipo buscarEquipoEnLista(String nombreCorto, ArrayList<Equipo> equipos) {   
 				Equipo resultado = null;
 				for (Equipo equipo : equipos) {
-					if(equipo.getNombre().equals(nombreCorto)) {
+					if(equipo.getNombreCorto().equals(nombreCorto)) {
 						return equipo;
 					}
 				}
@@ -1765,70 +1771,159 @@ public class Ejercicios {
 			 * Para este método hemos creado submétodos: actualizaEquipos,creaListaEquipos,buscarEquipoEnLista,creaPartido
 			 */
 						
-				public ArrayList<Equipo> generaClasificacion (String rutaPartidos, String rutaEquipos){
-					ArrayList<Equipo> resultado; 
-				try {
-					resultado = creaListaEquipos(rutaPartidos);
+			public ArrayList<Equipo> generaClasificacion (String rutaPartidos, String rutaEquipos){
+				ArrayList<Equipo> resultado; 
+			try {
+				resultado = creaListaEquipos(rutaEquipos);
 
-					BufferedReader fichero;
-					fichero = new BufferedReader(new FileReader(rutaPartidos));
-					String registro;
-					Partido partido;
-					while ((registro = fichero.readLine()) != null) {
-						 partido = creaPartido(registro);
-						 if (partido == null)
-							 break;
-						 // Actualiza lista Equipos
-						 actualizaEquipos (partido, resultado); 
-					}
-					Collections.sort(resultado, null);
-					
-					fichero.close();
-					System.out.println("Fin de la lectura del fichero");
-					return resultado;
-
-				} catch (FileNotFoundException excepcion) {
-					System.out.println("fichero no encontrado");
-
-				} catch (IOException e) {
-					System.out.println("IO Excepcion");
+				BufferedReader fichero;
+				fichero = new BufferedReader(new FileReader(rutaPartidos));
+				String registro;
+				Partido partido;
+				while ((registro = fichero.readLine()) != null) {
+					 partido = creaPartido(registro);
+					 if (partido == null)
+						 break;
+					 // Actualiza lista Equipos
+					 actualizaEquipos (partido, resultado); 
 				}
-				return null;
-			}	
-			
-/*				// --------ACTIVIDAD: Mostrar clasificación en un recuadro con SWING--------------------------------- 19/02/2019
+				Collections.sort(resultado, null);
 				
-				public void muestraClasificacion() {
-					JFrame ventana;
-					ventana = new JFrame("Mi primer SWING");
-					JButton boton= new JButton("Pulsame!");
-					JPanel panel = new JPanel();
-					ventana.add(panel);
-					
-					
-					ArrayList<Equipo> clasificacion = this.generaClasificacion("ficheros/equipos.txt","ficheros/partidos.txt");
-					
-					String[] columnas= {"EQUIPO","PJ","PG","PE","PP","GF","GC"};
-					ArrayList<ArrayList<Object>> datos = new ArrayList<>();
-					ArrayList equipo = new ArrayList<>();
-					
-					
-					
-					//DefaultTableModel modelo = new DefaultTableModel(columnas,clasificacion.size());
-					ventana.pack();
-					ventana.setVisible(true);
-				}
+				fichero.close();
+				//System.out.println("Fin de la lectura del fichero");
+				return resultado;
+
+			} catch (FileNotFoundException excepcion) {
+				System.out.println("fichero no encontrado");
+
+			} catch (IOException e) {
+				System.out.println("IO Excepcion");
+			}
+			return null;
+		}	
+			
+/*		// --------ACTIVIDAD: Mostrar clasificación en un recuadro con SWING--------------------------------- 19/02/2019
+				
+		public void muestraClasificacion() {
+			JFrame ventana;
+			ventana = new JFrame("Clasificacion");
+	
+			JPanel panel = new JPanel();
+			ventana.add(panel);
+	
+			ArrayList<Equipo> equipos = this.generaClasificacion("ficheros/partidos.txt", "ficheros/equipos.txt");
+			
+			String[] columnas= {"EQUIPO","PUNTOS","PJ","PG","PE","PP","GF","GC"};
+			DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+	
+			modelo.addRow(columnas);
+			for (Equipo equipo : equipos) {
+				Object[] vector = { equipo.getNombre(), 
+						equipo.getPuntos(),
+						equipo.getPj(), equipo.getPg(), equipo.getPe(),
+						equipo.getPp(), equipo.getGf(), equipo.getGc() };
+				modelo.addRow(vector);
+			}
+			JTable tabla = new JTable(modelo);
+			panel.add(tabla);
+			ventana.pack();
+			ventana.setVisible(true);
+	}
 			
 */
 			
+	
 			
 			
+								//############ ESCRITURA EN FICHERO ######################
+	
+	//--------ACTIVIDAD: Método que recoge por teclado lo escrito y lo guarda en fichero -----------------------20/02/2019		
+	/* Le pasaremos como parámetro un fichero que no existe (lo crea)
+	*/
+	public void entradaTecladoAFichero(String rutafichero) {
+		
+		try {
+			BufferedWriter fichero;
+			fichero = new BufferedWriter(new FileWriter(rutafichero));
 			
+			Scanner teclado = new Scanner(System.in); 		// definimos objeto de lac lase scanner .
+			String tecleado;
+			String palabraFinalizar = "exit";
+			while((tecleado = teclado.nextLine()).compareToIgnoreCase(palabraFinalizar) != 0) {
+				System.out.println("Teclee sus datos .. | para terminar escribir: exit");
+				fichero.write(tecleado + "\n");
+			}
+
+			fichero.close();	
+		} catch (IOException e) {
+			System.out.println("Error I/O" + e.getMessage());
+
+		}
+		System.out.println("fin entrada de datos");
+	}
+			
+	
+	
+	
+		
+	//--------ACTIVIDAD: Método que recoge num aleatorios y guardar en fichero -----------------------20/02/2019
+	public void grabarTiradasDados(int cuantas){
+		try {
+			Random rnd = new Random();
+			BufferedWriter fichero = new BufferedWriter(new FileWriter("ficheros/tiradasDado.txt"));
+			int acumulado = 0;
+			for (int i = 0; i < cuantas; i++) {
+				int numAletorio = 1 + rnd.nextInt(6);
+				acumulado+= numAletorio;
+				fichero.write(numAletorio + " ");			
+	
+			}
+			System.out.println("La media es: " + (float)acumulado/cuantas);
+			fichero.close();
+			
+		} catch (IOException e) {
+			System.out.println("Error I/O" + e.getMessage());
+		}
+		System.out.println("fin programa");
+	}
+	
+	
+	
+	
+								//############ AÑADIR OBJETO A UN FICHERO  (binario) ######################
+	
+	//--------ACTIVIDAD: Método recoge objetos y los añade a un fichero -----------------------20/02/2019
+	/* OJO: para esto se debe de serializar la clase de la que vamos a obtener los objetos
+	 *  Escribir en un fichero los objetos que les pasemos. 
+	 */
+	 public void pasarObjectoAFichero (String rutaEquipo) {
+		 //FileOutputStream salida = new FileOutputStream("ficheros/equipos.obj");
+		// ObjectInputStream objetos = new ObjectOutputStream(salida);
+		 
+		 
+		 //recorre equipos txt , creand objetos equipo
+		 //grabandolos en objetos
+		 //leer fichero equipo
+		 //grabarlo
+	 }
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		 ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
+		ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
 		 
+		 
+		 //ejercicios.entradaTecladoAFichero("ficheros/teclado.txt"); 
+		ejercicios.grabarTiradasDados(10);
+		
+		
 		 System.out.println("fin");
 
 		
@@ -1876,7 +1971,18 @@ public class Ejercicios {
 		
 		
 /*	
+ 		
  
+ 
+ 
+ 		//20/02/2019-------ACTIVIDAD:Método que recoge num aleatorios y guardar en fichero -----------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+ 		ejercicios.grabarTiradasDados(10);
+ 
+ 
+ 		//20/02/2019--------ACTIVIDAD: Método que recoge por teclado lo escrito y lo guarda en fichero -----------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+		ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
  
  
  
