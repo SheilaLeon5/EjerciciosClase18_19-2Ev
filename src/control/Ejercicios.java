@@ -1897,8 +1897,20 @@ public class Ejercicios {
 	 *  Escribir en un fichero los objetos que les pasemos. 
 	 */
 	 public void pasarObjectoAFichero (String rutaEquipo) {
-		 //FileOutputStream salida = new FileOutputStream("ficheros/equipos.obj");
-		// ObjectInputStream objetos = new ObjectOutputStream(salida);
+		try {
+			FileOutputStream salida = new FileOutputStream("ficheros/equipos.obj");  //fichero salida dónde va ir los objetos
+			ObjectOutputStream objetos = new ObjectOutputStream(salida);
+			
+
+			ArrayList<Equipo> equipos = generaClasificacion("ficheros/partidos.txt", rutaEquipo);
+			for (Equipo equipo : equipos) {
+				objetos.writeObject(new Equipo());
+			}
+			objetos.close();
+			System.out.println(objetos);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		 
 		 
 		 //recorre equipos txt , creand objetos equipo
@@ -1917,11 +1929,10 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
-		 
-		 
+		ejercicios.pasarObjectoAFichero("ficheros/equipos.txt");
+		//ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
 		 //ejercicios.entradaTecladoAFichero("ficheros/teclado.txt"); 
-		ejercicios.grabarTiradasDados(10);
+		//ejercicios.grabarTiradasDados(10);
 		
 		
 		 System.out.println("fin");
