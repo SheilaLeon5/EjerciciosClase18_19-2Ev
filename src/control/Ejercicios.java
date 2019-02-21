@@ -1896,33 +1896,47 @@ public class Ejercicios {
 	/* OJO: para esto se debe de serializar la clase de la que vamos a obtener los objetos
 	 *  Escribir en un fichero los objetos que les pasemos. 
 	 */
+	
 	 public void pasarObjectoAFichero (String rutaEquipo) {
 		try {
+			BufferedReader fichero = new BufferedReader(new FileReader(rutaEquipo));
 			FileOutputStream salida = new FileOutputStream("ficheros/equipos.obj");  //fichero salida dónde va ir los objetos
 			ObjectOutputStream objetos = new ObjectOutputStream(salida);
 			
+			   
+		   String registro = fichero.readLine(); // leer linea por linea. Devuelve una string
+		   while(registro != null){
+			   String[] campos = registro.split("#");
+			   Equipo equipo = new Equipo(Integer.parseInt(campos[0]), campos[1], campos[2]);
+			   equipo.setPuntos(0);
+			   equipo.setPp(0);
+			   equipo.setPg(0);
+			   equipo.setPe(0);
+			   equipo.setPp(0);
+			   equipo.setGf(0);
+			   equipo.setGc(0);
 
-			ArrayList<Equipo> equipos = generaClasificacion("ficheros/partidos.txt", rutaEquipo);
-			for (Equipo equipo : equipos) {
-				objetos.writeObject(new Equipo());
-			}
+			   //objetos.writeObject(equipo);
+		   }
 			objetos.close();
-			System.out.println(objetos);
+			fichero.close();
+			System.out.println("fffffffff");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		 
-		 
-		 //recorre equipos txt , creand objetos equipo
-		 //grabandolos en objetos
-		 //leer fichero equipo
-		 //grabarlo
 	 }
+
+	/*
+	 * 
+	 * //--------ACTIVIDAD: Método lee fichero binario y devuelve los
+	 * objetos-----------------------21/02/2019 public void leerObjetosEquipos() {
+	 * 
+	 * }
+	 */
 	
 	
 	
-	
-	
+	//ACTIVIDAD: dado un equipo, mostrar sus jugadores
 	
 	
 	
@@ -1983,6 +1997,8 @@ public class Ejercicios {
 		
 /*	
  		
+ 		//21/02/2019--------ACTIVIDAD: Método lee fichero binario y devuelve los objetos----------------------- 
+ 
  
  
  
