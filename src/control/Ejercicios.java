@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -35,6 +37,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
+import org.omg.CORBA.DataInputStream;
 
 import modelo.Equipo;
 import modelo.Estudiante;
@@ -1904,9 +1908,10 @@ public class Ejercicios {
 			ObjectOutputStream objetos = new ObjectOutputStream(salida);
 			
 			   
-		   String registro = fichero.readLine(); // leer linea por linea. Devuelve una string
-		   while(registro != null){
+		   String registro;
+		   while((registro= fichero.readLine()) != null){
 			   String[] campos = registro.split("#");
+
 			   Equipo equipo = new Equipo(Integer.parseInt(campos[0]), campos[1], campos[2]);
 			   equipo.setPuntos(0);
 			   equipo.setPp(0);
@@ -1916,23 +1921,46 @@ public class Ejercicios {
 			   equipo.setGf(0);
 			   equipo.setGc(0);
 
-			   //objetos.writeObject(equipo);
+			  objetos.writeObject(equipo);  
 		   }
 			objetos.close();
 			fichero.close();
-			System.out.println("fffffffff");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	 }
+	 
 
-	/*
-	 * 
-	 * //--------ACTIVIDAD: Método lee fichero binario y devuelve los
-	 * objetos-----------------------21/02/2019 public void leerObjetosEquipos() {
-	 * 
-	 * }
-	 */
+	
+	  
+	  //--------ACTIVIDAD: Método lee fichero binario y devuelve los objetos-----------------------21/02/2019 
+	 public void leerObjetosEquipos() {
+		try {
+			
+			FileInputStream fichero = new FileInputStream("ficheros/equipos.obj");
+			DataInputStream entrada = new DataInputStream(fichero);		
+
+			
+			while(true){
+				try {
+					Object objetoObtenido = objetos.readObject();	// Leer el objeto	
+
+					System.out.println(objetoObtenido.toString());
+
+				} catch (ClassNotFoundException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			fichero.close();
+			objetos.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	  }
+	 
 	
 	
 	
@@ -1943,6 +1971,9 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.leerObjetosEquipos();
+		
+		
 		ejercicios.pasarObjectoAFichero("ficheros/equipos.txt");
 		//ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
 		 //ejercicios.entradaTecladoAFichero("ficheros/teclado.txt"); 
