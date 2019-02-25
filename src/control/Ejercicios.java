@@ -1892,7 +1892,7 @@ public class Ejercicios {
 	}
 	
 	
-	
+
 	
 								//############ AÑADIR OBJETO A UN FICHERO  (binario) ######################
 	
@@ -1922,47 +1922,80 @@ public class Ejercicios {
 			   equipo.setGc(0);
 
 			  objetos.writeObject(equipo);  
+			System.out.println(objetos);
 		   }
+		   
 			objetos.close();
 			fichero.close();
+		} catch (FileNotFoundException excepcion) {
+			System.out.println("fichero no encontrado");
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	 }
 	 
-
 	
-	  
+	
+
 	  //--------ACTIVIDAD: Método lee fichero binario y devuelve los objetos-----------------------21/02/2019 
 	 public void leerObjetosEquipos() {
 		try {
-			
-			FileInputStream fichero = new FileInputStream("ficheros/equipos.obj");
-			DataInputStream entrada = new DataInputStream(fichero);		
+			FileInputStream fichero = new FileInputStream("ficheros/equipos.obj");  //leer bytes del fichero del fichero especificado
+			ObjectInputStream objetos = new ObjectInputStream(fichero);
 
-			
+
 			while(true){
 				try {
-					Object objetoObtenido = objetos.readObject();	// Leer el objeto	
-
-					System.out.println(objetoObtenido.toString());
-
+					Object objeto = objetos.readObject();
+					System.out.println(objeto.toString());
+					
 				} catch (ClassNotFoundException e) {
 					System.out.println(e.getMessage());
 				}
+				
 			}
-			fichero.close();
-			objetos.close();
+		
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
 	  }
+
 	 
 	
-	
+/*	  //--------ACTIVIDAD: Método lee fichero binario y devuelve los objetos en un fichero-----------------------21/02/2019 
+	 public void leerObjetosEquiposGuardarDato() {
+		try {
+			FileInputStream fichero = new FileInputStream("ficheros/equipos.obj");  //leer bytes del fichero del fichero especificado
+			ObjectInputStream objetos = new ObjectInputStream(fichero);
+
+
+			while(true){
+				try {
+					Object objeto = objetos.readObject();
+					System.out.println(objeto.toString());
+					
+				} catch (ClassNotFoundException e) {
+					System.out.println(e.getMessage());
+				}
+				
+			}
+		
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+	  }	*/
+	 
+	 
+	 
+	 
+	 
+	 
 	
 	//ACTIVIDAD: dado un equipo, mostrar sus jugadores
 	
@@ -1971,10 +2004,11 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		ejercicios.leerObjetosEquipos();
+
+		//ejercicios.leerObjetosEquipos();
 		
 		
-		ejercicios.pasarObjectoAFichero("ficheros/equipos.txt");
+		//ejercicios.pasarObjectoAFichero("ficheros/equipos.txt");
 		//ArrayList<Equipo> result = ejercicios.generaClasificacion("ficheros/partidos.txt","ficheros/equipos.txt");
 		 //ejercicios.entradaTecladoAFichero("ficheros/teclado.txt"); 
 		//ejercicios.grabarTiradasDados(10);
@@ -2027,10 +2061,14 @@ public class Ejercicios {
 		
 		
 /*	
+ 		//21/02/2019--------ACTIVIDAD: Método lee fichero binario y devuelve los objetos------------------------ 
+ 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.leerObjetosEquipos();
+ 	
  		
  		//21/02/2019--------ACTIVIDAD: Método lee fichero binario y devuelve los objetos----------------------- 
- 
- 
+ 		Ejercicios ejercicios = new Ejercicios();
+ 		ejercicios.pasarObjectoAFichero("ficheros/equipos.txt");
  
  
  		//20/02/2019-------ACTIVIDAD:Método que recoge num aleatorios y guardar en fichero -----------------------
