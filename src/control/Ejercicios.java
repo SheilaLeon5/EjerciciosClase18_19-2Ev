@@ -2001,12 +2001,13 @@ public class Ejercicios {
 	
 	public void devolverJugadoresEq() {
 		
-		//Leer por teclado y guardar el valor (Contemplar nombre corto /largo)
+		//Leer por teclado y guardar el valor (Contemplar nombre largo)
 		
 		String registro = null;
+		String registroJugadores = null;
 		Scanner teclado = new Scanner(System.in); 		// definimos objeto de la clase scanner .
 		String tecleado = null;
-		//String nombreCorto;
+		String idEquipo;
 		String nombreLargo;
 		String palabraFinalizar = ".";
 
@@ -2018,19 +2019,22 @@ public class Ejercicios {
 			while((tecleado = teclado.nextLine()).compareTo(palabraFinalizar) != 0 ) { 
 				while((registro=fichero.readLine()) !=null) {
 					String[] campos = registro.split("#");
-					//nombreCorto = campos[1]; 
+					idEquipo = campos[0];
 					nombreLargo = campos[2];
 					if(tecleado.equals(nombreLargo)) {
 						System.out.println(nombreLargo + " ha sido escrito");
-						
+
 						//Leer jugadores
-						
-						
+						while((registroJugadores= ficheroJug.readLine())!= null) {
+							String[]camposJug = registroJugadores.split("#");
+							if (idEquipo.equals(camposJug[4])) {
+								System.out.println(camposJug[2]);
+							}
+						}
 					}
 				}
 			}
 			teclado.close(); fichero.close();
-			//System.out.println(tecleado);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}	catch (IOException e) {
