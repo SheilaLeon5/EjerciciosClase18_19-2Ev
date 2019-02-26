@@ -1999,11 +1999,54 @@ public class Ejercicios {
 	
 	//ACTIVIDAD: dado un equipo, mostrar sus jugadores
 	
+	public void devolverJugadoresEq() {
+		
+		//Leer por teclado y guardar el valor (Contemplar nombre corto /largo)
+		
+		String registro = null;
+		Scanner teclado = new Scanner(System.in); 		// definimos objeto de la clase scanner .
+		String tecleado = null;
+		//String nombreCorto;
+		String nombreLargo;
+		String palabraFinalizar = ".";
+
+		try {
+			BufferedReader fichero = new BufferedReader(new FileReader("ficheros/equipos.txt")); //Leer fichero (comparar lo escrito por teclado)
+			
+			//while((registro= fichero.readLine()) != null ||((tecleado = teclado.nextLine()).compareTo(palabraFinalizar)) != 0 ) { 
+			while((tecleado = teclado.nextLine()).compareTo(palabraFinalizar) != 0 ) { 
+				while(fichero.readLine() !=null) {
+					String[] campos = registro.split("#");
+					//nombreCorto = campos[1]; 
+					nombreLargo = campos[2];
+					
+					if(tecleado.equals(nombreLargo)) {
+						System.out.println(nombreLargo + "ha sido escrito");
+					}else {
+						System.out.println("ha escrito " + tecleado );
+					}
+				}
+				//break;
+			}
+			teclado.close(); fichero.close();
+			//System.out.println(tecleado);
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}	catch (IOException e) {
+			System.out.println(e.getMessage());
+		}	
+	}
+
+
+	
+	
+	
 	
 	
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.devolverJugadoresEq();
 
 		//ejercicios.leerObjetosEquipos();
 		
