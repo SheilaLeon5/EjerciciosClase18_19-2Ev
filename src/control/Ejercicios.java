@@ -2012,21 +2012,23 @@ public class Ejercicios {
 
 		try {
 			BufferedReader fichero = new BufferedReader(new FileReader("ficheros/equipos.txt")); //Leer fichero (comparar lo escrito por teclado)
+			BufferedReader ficheroJug = new BufferedReader(new FileReader("ficheros/equipos.txt"));
 			
 			//while((registro= fichero.readLine()) != null ||((tecleado = teclado.nextLine()).compareTo(palabraFinalizar)) != 0 ) { 
+			System.out.println("Escriba su equipo, ENTER y '.' para finalizar");
 			while((tecleado = teclado.nextLine()).compareTo(palabraFinalizar) != 0 ) { 
-				while(fichero.readLine() !=null) {
+				while((registro=fichero.readLine()) !=null) {
 					String[] campos = registro.split("#");
 					//nombreCorto = campos[1]; 
 					nombreLargo = campos[2];
-					
 					if(tecleado.equals(nombreLargo)) {
-						System.out.println(nombreLargo + "ha sido escrito");
-					}else {
-						System.out.println("ha escrito " + tecleado );
+						System.out.println(nombreLargo + " ha sido escrito");
+						
+						//Leer jugadores
+						
+						
 					}
 				}
-				//break;
 			}
 			teclado.close(); fichero.close();
 			//System.out.println(tecleado);
