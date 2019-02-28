@@ -1997,7 +1997,7 @@ public class Ejercicios {
 	 
 	 
 	
-	//ACTIVIDAD: dado un equipo, mostrar sus jugadores
+	//---------ACTIVIDAD: dado un equipo, mostrar sus jugadores (POR MI CUENTA)---------------------------------22/02/2019
 	
 	public void devolverJugadoresEq() {
 		
@@ -2043,6 +2043,62 @@ public class Ejercicios {
 	}
 
 
+	
+	
+	
+	//---------ACTIVIDAD: dado un equipo, mostrar sus jugadores REFACTORIZANDO (POR MI CUENTA)---------------------------------
+	
+	public void devolverJugadoresEqMap(String ficheroEquipos) {
+		//Llamar método recoge lo escrito por teclado
+		
+		//Comparar lo escrito con el Objecto (Equipo)
+		
+	}
+	
+	public String tecleado() {
+		Scanner teclado = new Scanner(System.in); 		// definimos objeto de la clase scanner .
+		String tecleado = null;
+		System.out.println("Escriba el equipo , presione ENTER y luego 'stop' para finalizar");
+		while((tecleado=teclado.next()).compareToIgnoreCase("stop") !=0) {
+			//??
+		}
+		return tecleado;	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * public HashMap<String, ArrayList<Equipo>> devolverJugadoresEqMap(String
+	 * ficheroEquipos) {
+	 * 
+	 * }
+	 */	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -2109,6 +2165,11 @@ public class Ejercicios {
 		
 		
 /*	
+ 		//22/02/2019--------ACTIVIDAD: dado un equipo, mostrar sus jugadores------------------------ 
+ 		
+ 		
+ 		
+ 		
  		//21/02/2019--------ACTIVIDAD: Método lee fichero binario y devuelve los objetos------------------------ 
  		Ejercicios ejercicios = new Ejercicios();
 		ejercicios.leerObjetosEquipos();
