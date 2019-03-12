@@ -2048,7 +2048,7 @@ public class Ejercicios {
 	
 	//---------ACTIVIDAD: dado un equipo, mostrar sus jugadores REFACTORIZANDO (POR MI CUENTA)---------------------------------
 	
-/*	public void devolverJugadoresEqMap(String ficheroEquipos) {
+	public void devolverJugadoresEqMap(String ficheroEquipos) {
 		//Llamar método recoge lo escrito por teclado
 		
 		//Comparar lo escrito con el Objecto (Equipo)
@@ -2058,13 +2058,14 @@ public class Ejercicios {
 	public String tecleado() {
 		Scanner teclado = new Scanner(System.in); 		// definimos objeto de la clase scanner .
 		String tecleado = null;
+		
 		System.out.println("Escriba el equipo , presione ENTER y luego 'stop' para finalizar");
 		while((tecleado=teclado.next()).compareToIgnoreCase("stop") !=0) {
-			//??
+
 		}
 		return tecleado;	
 	}
-*/	
+	
 	
 	
 	/*
@@ -2196,8 +2197,22 @@ public class Ejercicios {
 	
 	
 	
-	
-	
+	//ACTIVIDAD: Obtener un ArrayList(Lista) de todos los equipos  ------------------------------------------------------- 12/03/2019 
+	/* 
+	 * El parámetro 'equipoNombrCorto': será el nombre corto
+	 * Recorrer el ArrayList y comprobar que se encuentre el equipo
+	 */
+	public Equipo buscarEquipo(String equipoNombrCorto, ArrayList<Equipo> equipos) {
+		
+		for (Equipo equipo : equipos) {
+			if (equipoNombrCorto.equals(equipo.getNombreCorto())){
+				System.out.println("Equipo '" + equipo + "' encontrado");
+				break;
+			}
+		}
+		System.out.println("Equipo NO encontrado");
+		return null;	
+	}
 	
 	
 	
@@ -2217,8 +2232,13 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		int []pajar={4,8,10,8,42,7};
-		ejercicios.busquedaBinaria(pajar, 10);
+		ArrayList<Equipo> listaEq = ejercicios.crearListaEquipos2("ficheros/equipos.txt");
+		ejercicios.buscarEquipo("AA", listaEq);
+		//int []pajar={4,8,10,8,42,7};
+		//ejercicios.busquedaBinaria(pajar, 10);
+		
+		
+		
 		//ejercicios.crearListaEquipos("ficheros/equipos.txt");
 		
 		//ejercicios.devolverJugadoresEq();
@@ -2279,10 +2299,8 @@ public class Ejercicios {
 		
 		
 /*	
- 
  		//12/03/2019--------ACTIVIDAD: En un array de números buscar un valor
  		Ejercicios ejercicios = new Ejercicios();
- 		
  		
  
  		//12/03/2019 --------ACTIVIDAD: Obtener un ArrayList(Lista) de todos los equipos (Con objeto) ------------------------------------------------------- 
@@ -2296,6 +2314,8 @@ public class Ejercicios {
  		//22/02/2019--------ACTIVIDAD: dado un equipo, mostrar sus jugadores REFACTORIZANDO (POR MI CUENTA)------------------------ 
  		 
  	
+ 		!!!???
+ 
  
  		//22/02/2019--------ACTIVIDAD: dado un equipo, mostrar sus jugadores (POR MI CUENTA)------------------------ 
  		Ejercicios ejercicios = new Ejercicios();
