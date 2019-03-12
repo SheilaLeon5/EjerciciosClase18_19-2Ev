@@ -2048,7 +2048,7 @@ public class Ejercicios {
 	
 	//---------ACTIVIDAD: dado un equipo, mostrar sus jugadores REFACTORIZANDO (POR MI CUENTA)---------------------------------
 	
-	public void devolverJugadoresEqMap(String ficheroEquipos) {
+/*	public void devolverJugadoresEqMap(String ficheroEquipos) {
 		//Llamar método recoge lo escrito por teclado
 		
 		//Comparar lo escrito con el Objecto (Equipo)
@@ -2064,20 +2064,7 @@ public class Ejercicios {
 		}
 		return tecleado;	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+*/	
 	
 	
 	/*
@@ -2086,6 +2073,129 @@ public class Ejercicios {
 	 * 
 	 * }
 	 */	
+	
+	
+	
+
+	
+	
+	// --------ACTIVIDAD: Obtener un ArrayList(Lista) de todos los equipos  ------------------------------------------------------- 12/03/2019
+						//(Modificar la actividad: CreamapaEquipos)
+	public ArrayList<Equipo> crearListaEquipos(String rutaFichero){
+		try {
+			BufferedReader fichero;
+			fichero = new BufferedReader(new FileReader(rutaFichero));
+			
+			String registro ;
+			Equipo equipo = null;
+			
+			ArrayList<Equipo> listaNombreEquipos = new ArrayList<Equipo>();
+			
+			
+			while ((registro =fichero.readLine() ) != null) {
+				String [] campos = registro.split("#");
+				equipo = new Equipo(Integer.parseInt(campos[0]), campos[1], campos[2]);
+				listaNombreEquipos.add(equipo);
+			}
+			
+			System.out.println(listaNombreEquipos);
+			
+			fichero.close();
+			System.out.println("Fin de la lectura del fichero");
+			return listaNombreEquipos;
+			
+		} catch (FileNotFoundException excepcion) {
+			System.out.println("fichero no encontrado");
+
+		} catch (IOException e) {
+			System.out.println("IO Excepcion");
+		}		
+	return null;
+}
+	// MISMA ACTIVIDAD ANTERIOR PERO CON OBJETO
+	public ArrayList<Equipo> crearListaEquipos2(String rutaFichero){
+		try {
+			BufferedReader fichero;
+			fichero = new BufferedReader(new FileReader(rutaFichero));
+			
+			String registro ;
+			Equipo equipo = null;
+			
+			ArrayList<Equipo> listaNombreEquipos = new ArrayList<Equipo>();
+			
+			
+			while ((registro =fichero.readLine() ) != null) {
+				String [] campos = registro.split("#");
+				equipo.setIdEquipo(Integer.parseInt(campos[0]));
+				equipo.setNombreCorto(campos[1]);
+				equipo.setNombreCorto(campos[2]);
+				equipo.setGc(0);
+				equipo.setGf(0);
+				equipo.setPe(0);
+				equipo.setPp(0);
+				equipo.setPg(0);
+				equipo.setPj(0);
+				equipo.setPuntos(0);
+				listaNombreEquipos.add(equipo);
+			}
+			
+			System.out.println(listaNombreEquipos);
+			
+			fichero.close();
+			System.out.println("Fin de la lectura del fichero");
+			return listaNombreEquipos;
+			
+		} catch (FileNotFoundException excepcion) {
+			System.out.println("fichero no encontrado");
+
+		} catch (IOException e) {
+			System.out.println("IO Excepcion");
+		}		
+	return null;
+}	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	//--------ACTIVIDAD: En un array de números buscar un valor
+	/*
+	 * Es un algoritmo para probar los límites: vamos por porciones comprobando poco a poco. 
+	 * Es decir, de 1000 números comprobamos 30.. por ejemplo. Otra opción que se encuentra a la izq, centro o derecha
+	 * Formula a tener en cuenta:   medi=((der-izq)/2)+izq
+	 * 
+	 * 
+	 *  devuelve:  -1 no encuentro
+	 */
+	public int busquedaBinaria(int[]pajar, int aguja) {
+		int izq= 0;
+		int der= pajar.length -1;
+		while(izq < der){
+			// Debemos saber la mitad del array
+			int medio = ((der - izq)/2)+izq;
+
+			if(pajar[medio] == aguja) {  //Medio
+				System.out.println("Número " + aguja + " encontrado en la posicion " + medio  );
+				return medio;
+			}
+			if (pajar[medio]< aguja) { //Derecha
+				izq = medio + 1;
+			}
+			else {
+				der = medio - 1;
+			}
+		}
+		System.out.println("NO ENCONTRADO " + aguja);
+		return -1;	
+	}
+	
+	
+	
 	
 	
 	
@@ -2107,7 +2217,11 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		ejercicios.devolverJugadoresEq();
+		int []pajar={4,8,10,8,42,7};
+		ejercicios.busquedaBinaria(pajar, 10);
+		//ejercicios.crearListaEquipos("ficheros/equipos.txt");
+		
+		//ejercicios.devolverJugadoresEq();
 
 		//ejercicios.leerObjetosEquipos();
 		
@@ -2165,8 +2279,27 @@ public class Ejercicios {
 		
 		
 /*	
- 		//22/02/2019--------ACTIVIDAD: dado un equipo, mostrar sus jugadores------------------------ 
+ 
+ 		//12/03/2019--------ACTIVIDAD: En un array de números buscar un valor
+ 		Ejercicios ejercicios = new Ejercicios();
  		
+ 		
+ 
+ 		//12/03/2019 --------ACTIVIDAD: Obtener un ArrayList(Lista) de todos los equipos (Con objeto) ------------------------------------------------------- 
+ 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.crearListaEquipos2("ficheros/equipos.txt");
+ 
+ 		//12/01/2019--------ACTIVIDAD: Obtener un ArrayList(Lista) de todos los equipos  ------------------------------------------------------- 
+ 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.crearListaEquipos("ficheros/equipos.txt");
+ 
+ 		//22/02/2019--------ACTIVIDAD: dado un equipo, mostrar sus jugadores REFACTORIZANDO (POR MI CUENTA)------------------------ 
+ 		 
+ 	
+ 
+ 		//22/02/2019--------ACTIVIDAD: dado un equipo, mostrar sus jugadores (POR MI CUENTA)------------------------ 
+ 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.devolverJugadoresEq();
  		
  		
  		
