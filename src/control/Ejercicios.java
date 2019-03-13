@@ -42,6 +42,7 @@ import org.omg.CORBA.DataInputStream;
 
 import modelo.Equipo;
 import modelo.Estudiante;
+import modelo.Jugador;
 import modelo.Partido;
 import modelo.Persona;
 
@@ -2099,7 +2100,7 @@ public class Ejercicios {
 				listaNombreEquipos.add(equipo);
 			}
 			
-			System.out.println(listaNombreEquipos);
+			//System.out.println(listaNombreEquipos);
 			
 			fichero.close();
 			System.out.println("Fin de la lectura del fichero");
@@ -2120,16 +2121,17 @@ public class Ejercicios {
 			fichero = new BufferedReader(new FileReader(rutaFichero));
 			
 			String registro ;
-			Equipo equipo = null;
+			
 			
 			ArrayList<Equipo> listaNombreEquipos = new ArrayList<Equipo>();
 			
 			
 			while ((registro =fichero.readLine() ) != null) {
 				String [] campos = registro.split("#");
+				Equipo equipo = new Equipo();
 				equipo.setIdEquipo(Integer.parseInt(campos[0]));
 				equipo.setNombreCorto(campos[1]);
-				equipo.setNombreCorto(campos[2]);
+				equipo.setNombre(campos[2]);
 				equipo.setGc(0);
 				equipo.setGf(0);
 				equipo.setPe(0);
@@ -2140,10 +2142,10 @@ public class Ejercicios {
 				listaNombreEquipos.add(equipo);
 			}
 			
-			System.out.println(listaNombreEquipos);
+			//System.out.println(listaNombreEquipos);
 			
 			fichero.close();
-			System.out.println("Fin de la lectura del fichero");
+			//System.out.println("Fin de la lectura del fichero");
 			return listaNombreEquipos;
 			
 		} catch (FileNotFoundException excepcion) {
@@ -2197,27 +2199,131 @@ public class Ejercicios {
 	
 	
 	
-	//ACTIVIDAD: Obtener un ArrayList(Lista) de todos los equipos  ------------------------------------------------------- 12/03/2019 
+	//ACTIVIDAD: Obtener el objeto equipo si se encuentra ------------------------------------------------------- 12/03/2019 
 	/* 
 	 * El parámetro 'equipoNombrCorto': será el nombre corto
 	 * Recorrer el ArrayList y comprobar que se encuentre el equipo
 	 */
 	public Equipo buscarEquipo(String equipoNombrCorto, ArrayList<Equipo> equipos) {
-		
 		for (Equipo equipo : equipos) {
 			if (equipoNombrCorto.equals(equipo.getNombreCorto())){
 				System.out.println("Equipo '" + equipo + "' encontrado");
-				break;
 			}
 		}
-		System.out.println("Equipo NO encontrado");
+		return null;	
+	}
+	
+	
+
+	//--------ACTIVIDAD: Crear lista de jugadores -----------------------------------------13/03/2019
+	/*
+	 * Crear la lista, vacia
+	 * Recorrer secuencialmente el fichero
+	 * crear el objeto jugador por cada registro del fichero
+	 * Finalizar con la devolucion de la lista.
+	 */
+	
+	public ArrayList<Jugador> creaListaJugadores(String rutaJugadores){
+		try {
+			BufferedReader fichero;
+			fichero = new BufferedReader(new FileReader(rutaJugadores));
+			ArrayList<Jugador> listaJugadores = new ArrayList<Jugador>();
+			String registro;
+			Jugador jugador;
+			while ((registro=fichero.readLine() ) != null) {
+				String [] campos = registro.split("#");  // romper cadena
+				
+				jugador = new Jugador();
+				jugador.setIdJugador(Integer.parseInt(campos[0]));
+				jugador.setNombre(campos[1]);
+				jugador.setDorsal(Integer.parseInt(campos[2]));
+				jugador.setCodigoEquipo(Integer.parseInt(campos[3]));
+				listaJugadores.add(jugador);
+			}
+			fichero.close();
+			System.out.println("Creada la lista de jugadores..");
+			
+			for (Jugador jugadorCreado : listaJugadores) {
+				System.out.println(jugadorCreado);
+				
+			}
+			return listaJugadores;
+			
+		} catch (FileNotFoundException excepcion) {
+			System.out.println("fichero no encontrado");
+
+		} catch (IOException e) {
+			System.out.println("IO Excepcion");
+		}
 		return null;	
 	}
 	
 	
 	
+
+	
+	//--------ACTIVIDAD: Crear un mapa de jugadores -----------------------------------------13/03/2019
+	/*
+	 * Crear la lista, vacia
+	 *  Recorrer secuencialmente el fichero
+	 *  crear el objeto jugador por cada registro del fichero
+	 *  Finalizar con la devolucion de la lista.
+	 *  
+	 *  valor:
+	 *  clave: NIF  o ID
+	 */
 	
 	
+	public HashMap<String, Jugador> creaMapaJugadores(String rutaJugadores){
+		try {
+			BufferedReader fichero;
+			fichero = new BufferedReader(new FileReader(rutaJugadores));
+			HashMap<String, Jugador> mapaJugadores = new HashMap<String, Jugador>();
+			String registro;
+			Jugador jugador;
+			while ((registro=fichero.readLine() ) != null) {
+				String [] campos = registro.split("#");  // romper cadena
+				
+				jugador = new Jugador();
+				jugador.setIdJugador(Integer.parseInt(campos[0]));
+				jugador.setNombre(campos[1]);
+				jugador.setDorsal(Integer.parseInt(campos[2]));
+				jugador.setCodigoEquipo(Integer.parseInt(campos[3]));
+				
+				mapaJugadores.put(campos[0], jugador);
+			}
+			fichero.close();
+			System.out.println("Creada la lista de jugadores..");
+			
+			/*
+			 * for (Jugador jugadorCreado : mapaJugadores) {
+			 * System.out.println(jugadorCreado); }
+			 */
+			return mapaJugadores;
+			
+		} catch (FileNotFoundException excepcion) {
+			System.out.println("fichero no encontrado");
+
+		} catch (IOException e) {
+			System.out.println("IO Excepcion");
+		}
+		return null;	
+		
+	}
+	
+	
+	
+	
+	//--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------13/03/2019
+	
+	public void ordenarListaJugadoresNombre(ArrayList<Jugador>ListaJugadores) {
+		
+	}
+	
+	
+	public void ordenarListaJugadoresNombre(HashMap<String,Jugador>MapaJugadores) {
+		
+	}
 	
 	
 	
@@ -2232,13 +2338,11 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		ArrayList<Equipo> listaEq = ejercicios.crearListaEquipos2("ficheros/equipos.txt");
-		ejercicios.buscarEquipo("AA", listaEq);
-		//int []pajar={4,8,10,8,42,7};
-		//ejercicios.busquedaBinaria(pajar, 10);
+		ejercicios.creaListaJugadores("ficheros/jugadores.txt");
 		
 		
 		
+
 		//ejercicios.crearListaEquipos("ficheros/equipos.txt");
 		
 		//ejercicios.devolverJugadoresEq();
@@ -2299,9 +2403,29 @@ public class Ejercicios {
 		
 		
 /*	
+	
+ 		 //13/03/2019--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------
+ 		 
+ 		 
+ 		//13/03/2019--------ACTIVIDAD: Crear un mapa de jugadores ----------------------------------------- 
+ 		 
+ 		 
+ 		 
+ 		//13/03/2019--------ACTIVIDAD: Crear lista de jugadores -----------------------------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.creaListaJugadores("ficheros/jugadores.txt");
+ 		 
+ 		 
+ 		//12/03/2019--------ACTIVIDAD: Obtener el objeto equipo si se encuentra  -------------------------------------------------------  
+ 		ArrayList<Equipo> listaEq = ejercicios.crearListaEquipos2("ficheros/equipos.txt");
+		ejercicios.buscarEquipo("RMA", listaEq);
+ 		 
+ 		 
  		//12/03/2019--------ACTIVIDAD: En un array de números buscar un valor
  		Ejercicios ejercicios = new Ejercicios();
- 		
+ 		int []pajar={4,8,10,8,42,7};
+		ejercicios.busquedaBinaria(pajar, 10);
+ 
  
  		//12/03/2019 --------ACTIVIDAD: Obtener un ArrayList(Lista) de todos los equipos (Con objeto) ------------------------------------------------------- 
  		Ejercicios ejercicios = new Ejercicios();

@@ -1,0 +1,20 @@
+1#nif1#Fernando Pacheco#1#1
+2#nif2#Antonio Sivera#13#2
+3#nif3#Álex Domínguez#31#2
+4#nif4#Carlos Vigaray#2#4
+5#nif5#Rubén Duarte#3#4
+6#nif6#Rodrigo Ely#4#3
+7#nif7#Víctor Laguardia#5#5
+8#nif8#Guillermo Maripán#6#5
+9#nif9#Ximo Navarro#15#6
+10#nif10#Adrián Marín#17#8
+11#nif11#Martín Aguirregabiria#21#1
+12#nif12#Adrián Diéguez#26#8
+13#nif13#Tomás Pina#8#9
+14#nif14#Ibai Gómez#11#10
+15#nif15#Burgui#14#10
+16#nif16#Daniel Torres#16#11
+17#nif17#Manu García#19#12
+18#nif18#Darko Brasanac#20#15
+19#nif19#Mubarak Wakaso#22#13
+20#nif20#Jony#23#18
