@@ -39,6 +39,8 @@ public class Equipo implements Serializable /*Comparable<Equipo>*/ {
 	}
 	
 
+	
+
 /*		
 	// 06/02/2018
 	@Override

@@ -2241,10 +2241,10 @@ public class Ejercicios {
 				listaJugadores.add(jugador);
 			}
 			fichero.close();
-			System.out.println("Creada la lista de jugadores..");
+			//System.out.println("Creada la lista de jugadores..");
 			
 			for (Jugador jugadorCreado : listaJugadores) {
-				System.out.println(jugadorCreado);
+				//System.out.println(jugadorCreado);
 				
 			}
 			return listaJugadores;
@@ -2295,10 +2295,11 @@ public class Ejercicios {
 			fichero.close();
 			System.out.println("Creada la lista de jugadores..");
 			
-			/*
-			 * for (Jugador jugadorCreado : mapaJugadores) {
-			 * System.out.println(jugadorCreado); }
-			 */
+			
+			for(String clave : mapaJugadores.keySet()) {
+				//System.out.println(clave);
+			}
+			 
 			return mapaJugadores;
 			
 		} catch (FileNotFoundException excepcion) {
@@ -2317,10 +2318,18 @@ public class Ejercicios {
 	//--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------13/03/2019
 	
 	public void ordenarListaJugadoresNombre(ArrayList<Jugador>ListaJugadores) {
-		
+		Collections.sort(ListaJugadores);
+	
+		 for (Jugador jugador : ListaJugadores) { 
+			System.out.println(jugador); 
+		 }
 	}
 	
 	
+	
+	
+	
+	//--------ACTIVIDAD:Ordenar  ?? -----------------------------------------13/03/2019
 	public void ordenarListaJugadoresNombre(HashMap<String,Jugador>MapaJugadores) {
 		
 	}
@@ -2338,8 +2347,12 @@ public class Ejercicios {
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
-		ejercicios.creaListaJugadores("ficheros/jugadores.txt");
+		ArrayList<Jugador> resultListaJug = ejercicios.creaListaJugadores("ficheros/jugadores.txt");
+		//ejercicios.creaMapaJugadores("ficheros/jugadores.txt");
+		ejercicios.ordenarListaJugadoresNombre(resultListaJug);
 		
+		
+		//ejercicios.ordenarListaJugadoresNombre(ListaJugadores);
 		
 		
 
@@ -2395,6 +2408,7 @@ public class Ejercicios {
 		
 		
 		// PROGRAMA: scene builder
+	//GESTION DE LIBRERIA: Maven
 		
 		
 		
@@ -2407,8 +2421,11 @@ public class Ejercicios {
  		 //13/03/2019--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------
  		 
  		 
- 		//13/03/2019--------ACTIVIDAD: Crear un mapa de jugadores ----------------------------------------- 
  		 
+ 		//13/03/2019--------ACTIVIDAD: Crear un mapa de jugadores ----------------------------------------- 
+ 		Ejercicios ejercicios = new Ejercicios();
+		ejercicios.creaListaJugadores("ficheros/jugadores.txt");
+		
  		 
  		 
  		//13/03/2019--------ACTIVIDAD: Crear lista de jugadores -----------------------------------------

@@ -25,9 +25,6 @@ public class Jugador extends Persona {
 	
 	
 	
-	
-	
-	
 	public int getIdJugador() {
 		return idJugador;
 	}
