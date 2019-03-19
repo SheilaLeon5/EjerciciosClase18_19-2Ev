@@ -1,6 +1,6 @@
 package modelo;
 
-public class Jugador extends Persona {
+public class Jugador extends Persona implements Comparable<Persona> {
 	private int idJugador;
 	private int dorsal;
 	private int codigoEquipo;
@@ -19,6 +19,25 @@ public class Jugador extends Persona {
 		this.dorsal = dorsal;
 		this.codigoEquipo = codigoEquipo;
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	
+	//19/03/2019
+	public int compareTo(Jugador o1, Jugador o2) {
+		if(o1.getNombre().compareToIgnoreCase(o2.getNombre()) > 1) {
+			return 1;
+		}
+		else if(o1.getNombre().compareToIgnoreCase(o2.getNombre()) < -1) {
+			return -1;
+		}else {
+			if (o1.getIdJugador() > o2.getIdJugador() ) {
+				return 1;
+			}else {
+				return -1;
+			}
+		}
 	}
 	
 	

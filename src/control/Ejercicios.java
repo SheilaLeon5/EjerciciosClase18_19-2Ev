@@ -2318,12 +2318,19 @@ public class Ejercicios {
 	//--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------13/03/2019
 	
 	public void ordenarListaJugadoresNombre(ArrayList<Jugador>ListaJugadores) {
-		Collections.sort(ListaJugadores);
-	
-		 for (Jugador jugador : ListaJugadores) { 
-			System.out.println(jugador); 
-		 }
+		Collections.sort(ListaJugadores, new Comparator<Jugador>() {
+
+			public int compare(Jugador p1, Jugador p2) {
+
+				return p1.getNombre().compareToIgnoreCase(p2.getNombre());
+			}
+		});
 	}
+	
+	
+//	https://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
+	
+	
 	
 	
 	
@@ -2337,7 +2344,7 @@ public class Ejercicios {
 	
 	
 	
-	
+	//Leer dos ficheros ordenarlos y unirlo en un tercero y ordenarlos
 	
 	
 	
