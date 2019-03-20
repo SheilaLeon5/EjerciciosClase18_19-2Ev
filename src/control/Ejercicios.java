@@ -2318,43 +2318,79 @@ public class Ejercicios {
 	//--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------13/03/2019
 	
 	public void ordenarListaJugadoresNombre(ArrayList<Jugador>ListaJugadores) {
-		Collections.sort(ListaJugadores, new Comparator<Jugador>() {
-
-			public int compare(Jugador p1, Jugador p2) {
-
-				return p1.getNombre().compareToIgnoreCase(p2.getNombre());
+		//Collections.sort((List<Jugador>) ListaJugadores);
+		ListaJugadores.sort(new Comparator<Jugador>() {
+			public int compare(Jugador eq1, Jugador eq2) {
+				return eq1.getNombre().compareToIgnoreCase(eq2.getNombre());
 			}
 		});
+		System.out.println(ListaJugadores);
 	}
 	
+
 	
-//	https://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
-// https://www.youtube.com/watch?v=gGkj6wtqrsE	
 
 	
 	
 	
 	
+
+//	https://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
+// https://www.youtube.com/watch?v=gGkj6wtqrsE	
 	
-	//--------ACTIVIDAD:Ordenar  ?? -----------------------------------------13/03/2019
-	public void ordenarListaJugadoresNombre(HashMap<String,Jugador>MapaJugadores) {
-		
+	
+	
+//https://www.arquitecturajava.com/java-comparator-interface-y-lambdas/
+//https://www.aprenderaprogramar.com/index.php?option=com_content&view=article&id=599:interface-comparator-api-java-diferencias-con-comparable-clase-collections-codigo-ejemplo-cu00918c&catid=58&Itemid=180	
+	
+	
+	
+	
+	
+
+
+	//--------ACTIVIDAD:Ordenar Mapa jugadores por nombre -----------------------------------------13/03/2019
+	public void ordenarMapaJugadoresNombre(HashMap<String,Jugador>MapaJugadores) {
 	}
-	
-	
+
 	
 	
 	//Leer dos ficheros ordenarlos y unirlo en un tercero y ordenarlos
 	
+
 	
 	
+	
+	
+	
+	
+	//--------ACTIVIDAD: Recursividad -----------------------------------------20/03/2019
+
+	
+	/*
+	 * public static void traverse(File parentNode, String leftIndent) { if
+	 * (parentNode.isDirectory()) { System.out.println(leftIndent +
+	 * parentNode.getName());
+	 * 
+	 * leftIndent += "     ";
+	 * 
+	 * File childNodes[] = parentNode.listFiles(); for (File childNode : childNodes)
+	 * { traverse(childNode, leftIndent); } } else {
+	 * 
+	 * System.out.println(leftIndent +"|   --> "+ parentNode.getName()); } }
+	 */
 	
 	
 	
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
+
+		
+		
+
 		ArrayList<Jugador> resultListaJug = ejercicios.creaListaJugadores("ficheros/jugadores.txt");
+	
 		//ejercicios.creaMapaJugadores("ficheros/jugadores.txt");
 		ejercicios.ordenarListaJugadoresNombre(resultListaJug);
 		
@@ -2424,6 +2460,15 @@ public class Ejercicios {
 		
 		
 /*	
+ 		//20/03/2019--------ACTIVIDAD: Recursividad -----------------------------------------
+ 		File inputFolder = new File("C:/users"); 
+		traverse(inputFolder, "");
+ 
+
+
+ 
+ 		//13/03/2019--------ACTIVIDAD:Ordenar Mapa jugadores por nombre -----------------------------------------
+ 		
 	
  		 //13/03/2019--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------
  		 

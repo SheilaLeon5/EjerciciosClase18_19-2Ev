@@ -1,6 +1,8 @@
 package modelo;
 
-public class Jugador extends Persona implements Comparable<Persona> {
+import java.util.Comparator;
+
+public  class Jugador extends Persona implements Comparator<Jugador> {
 	private int idJugador;
 	private int dorsal;
 	private int codigoEquipo;
@@ -24,21 +26,20 @@ public class Jugador extends Persona implements Comparable<Persona> {
 	
 	
 	
-	//19/03/2019
-	public int compareTo(Jugador o1, Jugador o2) {
+	//19/03/2019 Ordena nombre jugadores
+	public int compare(Jugador o1, Jugador o2) {
 		if(o1.getNombre().compareToIgnoreCase(o2.getNombre()) > 1) {
 			return 1;
 		}
 		else if(o1.getNombre().compareToIgnoreCase(o2.getNombre()) < -1) {
 			return -1;
 		}else {
-			if (o1.getIdJugador() > o2.getIdJugador() ) {
-				return 1;
-			}else {
-				return -1;
-			}
+			return 0;
 		}
 	}
+
+	
+	
 	
 	
 	
@@ -62,9 +63,8 @@ public class Jugador extends Persona implements Comparable<Persona> {
 	public void setCodigoEquipo(int codigoEquipo) {
 		this.codigoEquipo = codigoEquipo;
 	}
-	
-	
-	
+
+
 	
 	
 }
