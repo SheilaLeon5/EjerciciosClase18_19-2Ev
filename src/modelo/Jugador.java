@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Comparator;
 
-public  class Jugador extends Persona implements Comparator<Jugador> {
+public  class Jugador extends Persona {
 	private int idJugador;
 	private int dorsal;
 	private int codigoEquipo;
@@ -23,25 +23,21 @@ public  class Jugador extends Persona implements Comparator<Jugador> {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-	
-	//19/03/2019 Ordena nombre jugadores
-	public int compare(Jugador o1, Jugador o2) {
-		if(o1.getNombre().compareToIgnoreCase(o2.getNombre()) > 1) {
-			return 1;
-		}
-		else if(o1.getNombre().compareToIgnoreCase(o2.getNombre()) < -1) {
-			return -1;
-		}else {
-			return 0;
-		}
-	}
 
+	public static Comparator<Jugador> compareNamesPlayers = new Comparator<Jugador>() {
+		@Override
+		public int compare(Jugador o1, Jugador o2) {
+			if (o1.getNombre().compareToIgnoreCase(o2.getNombre())>0) {
+				return 1;
+			}else if(o1.getNombre().compareToIgnoreCase(o2.getNombre())<0) {
+				return -1;
+			}
+			return 0;
+		}	
+	};
 	
 	
-	
-	
+
 	
 	
 	
@@ -63,9 +59,6 @@ public  class Jugador extends Persona implements Comparator<Jugador> {
 	public void setCodigoEquipo(int codigoEquipo) {
 		this.codigoEquipo = codigoEquipo;
 	}
-
-
-	
 	
 }
 

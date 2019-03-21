@@ -2318,31 +2318,17 @@ public class Ejercicios {
 	//--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------13/03/2019
 	
 	public void ordenarListaJugadoresNombre(ArrayList<Jugador>ListaJugadores) {
-		//Collections.sort((List<Jugador>) ListaJugadores);
-		ListaJugadores.sort(new Comparator<Jugador>() {
-			public int compare(Jugador eq1, Jugador eq2) {
-				return eq1.getNombre().compareToIgnoreCase(eq2.getNombre());
-			}
-		});
+		Collections.sort(ListaJugadores, Jugador.compareNamesPlayers);
 		System.out.println(ListaJugadores);
 	}
 	
 
-	
-
-	
-	
-	
-	
 
 //	https://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
 // https://www.youtube.com/watch?v=gGkj6wtqrsE	
-	
-	
-	
 //https://www.arquitecturajava.com/java-comparator-interface-y-lambdas/
 //https://www.aprenderaprogramar.com/index.php?option=com_content&view=article&id=599:interface-comparator-api-java-diferencias-con-comparable-clase-collections-codigo-ejemplo-cu00918c&catid=58&Itemid=180	
-	
+//https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/	
 	
 	
 	
@@ -2351,11 +2337,19 @@ public class Ejercicios {
 
 	//--------ACTIVIDAD:Ordenar Mapa jugadores por nombre -----------------------------------------13/03/2019
 	public void ordenarMapaJugadoresNombre(HashMap<String,Jugador>MapaJugadores) {
+		
 	}
 
 	
 	
-	//Leer dos ficheros ordenarlos y unirlo en un tercero y ordenarlos
+	
+	
+	
+	
+	
+	
+	
+	//Leer dos ficheros ordenados y unirlo en un tercero y ordenarlos
 	
 
 	
@@ -2382,22 +2376,30 @@ public class Ejercicios {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[]args) {
 		
 		Ejercicios ejercicios = new Ejercicios();
 
 		
 		
+		 HashMap<String, Jugador> resultNombr = ejercicios.creaMapaJugadores("ficheros/jugadores.txt");
+		 ejercicios.ordenarMapaJugadoresNombre(resultNombr);
 
-		ArrayList<Jugador> resultListaJug = ejercicios.creaListaJugadores("ficheros/jugadores.txt");
-	
-		//ejercicios.creaMapaJugadores("ficheros/jugadores.txt");
-		ejercicios.ordenarListaJugadoresNombre(resultListaJug);
+		//ArrayList<Jugador> resultListaJug = ejercicios.creaListaJugadores("ficheros/jugadores.txt");
+		//ejercicios.ordenarListaJugadoresNombre(resultListaJug);
 		
 		
 		//ejercicios.ordenarListaJugadoresNombre(ListaJugadores);
-		
-		
 
 		//ejercicios.crearListaEquipos("ficheros/equipos.txt");
 		
@@ -2450,8 +2452,15 @@ public class Ejercicios {
 		
 		
 		
-		// PROGRAMA: scene builder
+	// PROGRAMA: scene builder
 	//GESTION DE LIBRERIA: Maven
+	//REFLEXION	
+	//Framework: Spring(java), Laravel(php)	
+		
+		
+		
+		
+	
 		
 		
 		
@@ -2470,8 +2479,10 @@ public class Ejercicios {
  		//13/03/2019--------ACTIVIDAD:Ordenar Mapa jugadores por nombre -----------------------------------------
  		
 	
- 		 //13/03/2019--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------
- 		 
+ 		//13/03/2019--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------
+ 		Ejercicios ejercicios = new Ejercicios();
+		ArrayList<Jugador> resultListaJug = ejercicios.creaListaJugadores("ficheros/jugadores.txt");
+		ejercicios.ordenarListaJugadoresNombre(resultListaJug);
  		 
  		 
  		//13/03/2019--------ACTIVIDAD: Crear un mapa de jugadores ----------------------------------------- 
