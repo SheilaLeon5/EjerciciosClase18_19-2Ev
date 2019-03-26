@@ -2331,15 +2331,49 @@ public class Ejercicios {
 //https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/	
 	
 	
+
 	
 	
 
 
 	//--------ACTIVIDAD:Ordenar Mapa jugadores por nombre -----------------------------------------13/03/2019
 	public void ordenarMapaJugadoresNombre(HashMap<String,Jugador>MapaJugadores) {
-		
+
+		Set<Entry<String, Jugador>> set = MapaJugadores.entrySet(); // Vista conjunta del mapa
+		 ArrayList<Entry<String, Jugador>> list = new ArrayList<Entry<String,Jugador>>(set);
+		 Collections.sort(list, new Comparator<Map.Entry<String, Jugador>>() {
+
+			@Override
+			public int compare(Entry<String, Jugador> o1, Entry<String, Jugador> o2) {
+				
+				return o1.getValue().compareTo(o2.getValue());
+			}
+		 }				);	
 	}
 
+	
+	/*
+			public void ordenarMapaPuntosEquipos2(HashMap<String,ArrayList<Integer>> mapaPuntosEquipos){
+				
+				Set<Entry<String, ArrayList<Integer>>> set = mapaPuntosEquipos.entrySet();   // entrySet --> Vista conjunta del mapa
+		        List<Entry<String, ArrayList<Integer>>> list = new ArrayList<Entry<String, ArrayList<Integer>>>(set);
+		        Collections.sort( list, new Comparator<Map.Entry<String, ArrayList<Integer>>>(){
+		            public int compare( Map.Entry<String, ArrayList<Integer>> o1, Map.Entry<String, ArrayList<Integer>> o2 ){
+		            	//return (o2.getValue()).compareTo( o1.getValue() );
+		            	return (o2.getValue().get(2).compareTo(o1.getValue().get(2)));
+		            }
+		        } );
+		        for(Map.Entry<String, ArrayList<Integer>> entry:list){
+		            System.out.println(entry.getKey()+" => "+entry.getValue());
+		        }
+			}	
+
+	
+	*/
+	
+	
+	
+	
 	
 	
 	
