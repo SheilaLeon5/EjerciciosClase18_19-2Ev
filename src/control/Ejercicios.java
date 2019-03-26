@@ -2332,13 +2332,10 @@ public class Ejercicios {
 	
 	
 
-	
-	
-
 
 	//--------ACTIVIDAD:Ordenar Mapa jugadores por nombre -----------------------------------------13/03/2019
 	public void ordenarMapaJugadoresNombre(HashMap<String,Jugador>MapaJugadores) {
-
+	
 		Set<Entry<String, Jugador>> set = MapaJugadores.entrySet(); // Vista conjunta del mapa
 		 ArrayList<Entry<String, Jugador>> list = new ArrayList<Entry<String,Jugador>>(set);
 		 Collections.sort(list, new Comparator<Map.Entry<String, Jugador>>() {
@@ -2346,33 +2343,15 @@ public class Ejercicios {
 			@Override
 			public int compare(Entry<String, Jugador> o1, Entry<String, Jugador> o2) {
 				
-				return o1.getValue().compareTo(o2.getValue());
+				return o1.getValue().getNombre().compareTo(o2.getValue().getNombre());
 			}
-		 }				);	
+		 });
+		 for (Entry<String, Jugador> entry : list) {
+			System.out.println(entry.getValue());
+		}
+	
 	}
 
-	
-	/*
-			public void ordenarMapaPuntosEquipos2(HashMap<String,ArrayList<Integer>> mapaPuntosEquipos){
-				
-				Set<Entry<String, ArrayList<Integer>>> set = mapaPuntosEquipos.entrySet();   // entrySet --> Vista conjunta del mapa
-		        List<Entry<String, ArrayList<Integer>>> list = new ArrayList<Entry<String, ArrayList<Integer>>>(set);
-		        Collections.sort( list, new Comparator<Map.Entry<String, ArrayList<Integer>>>(){
-		            public int compare( Map.Entry<String, ArrayList<Integer>> o1, Map.Entry<String, ArrayList<Integer>> o2 ){
-		            	//return (o2.getValue()).compareTo( o1.getValue() );
-		            	return (o2.getValue().get(2).compareTo(o1.getValue().get(2)));
-		            }
-		        } );
-		        for(Map.Entry<String, ArrayList<Integer>> entry:list){
-		            System.out.println(entry.getKey()+" => "+entry.getValue());
-		        }
-			}	
-
-	
-	*/
-	
-	
-	
 	
 	
 	
@@ -2409,16 +2388,7 @@ public class Ejercicios {
 	 */
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	public static void main(String[]args) {
 		
@@ -2426,7 +2396,7 @@ public class Ejercicios {
 
 		
 		
-		 HashMap<String, Jugador> resultNombr = ejercicios.creaMapaJugadores("ficheros/jugadores.txt");
+		 HashMap<String, Jugador> resultNombr = ejercicios.creaMapaJugadores("ficheros/jugadores2.txt");
 		 ejercicios.ordenarMapaJugadoresNombre(resultNombr);
 
 		//ArrayList<Jugador> resultListaJug = ejercicios.creaListaJugadores("ficheros/jugadores.txt");
@@ -2511,7 +2481,10 @@ public class Ejercicios {
 
  
  		//13/03/2019--------ACTIVIDAD:Ordenar Mapa jugadores por nombre -----------------------------------------
- 		
+ 		Ejercicios ejercicios = new Ejercicios();
+		 HashMap<String, Jugador> resultNombr = ejercicios.creaMapaJugadores("ficheros/jugadores2.txt");
+		 ejercicios.ordenarMapaJugadoresNombre(resultNombr);
+	
 	
  		//13/03/2019--------ACTIVIDAD:Ordenar lista jugadores por nombre -----------------------------------------
  		Ejercicios ejercicios = new Ejercicios();

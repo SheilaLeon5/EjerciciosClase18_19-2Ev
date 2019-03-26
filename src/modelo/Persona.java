@@ -38,7 +38,7 @@ public class Persona implements Comparable<Persona>, Humano {  // Comparable es 
 			else
 				return 0;
 	}
-	
+
 	
 	
 	

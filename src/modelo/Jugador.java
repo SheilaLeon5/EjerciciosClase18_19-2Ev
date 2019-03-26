@@ -1,8 +1,9 @@
 package modelo;
 
 import java.util.Comparator;
+import java.util.Map.Entry;
 
-public  class Jugador extends Persona {
+public  class Jugador extends Persona{
 	private int idJugador;
 	private int dorsal;
 	private int codigoEquipo;
@@ -37,7 +38,6 @@ public  class Jugador extends Persona {
 	};
 	
 	
-
 	
 	
 	
@@ -59,7 +59,13 @@ public  class Jugador extends Persona {
 	public void setCodigoEquipo(int codigoEquipo) {
 		this.codigoEquipo = codigoEquipo;
 	}
-	
+
+
+
+
+
+
+
 }
 
 
