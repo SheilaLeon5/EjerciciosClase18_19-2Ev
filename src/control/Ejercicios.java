@@ -2380,15 +2380,23 @@ public class Ejercicios {
 		String registrof1 = leerRegistro(f1);
 		String registrof2 = leerRegistro(f2);
 		
-		while (true) {
+		while (registrof1 != null && registrof2 != null) {
 			String k1 = registrof1.split("#")[0];  // El '0' determina coger el primer elemento
 			String k2 = registrof2.split("#")[0]; 
 			
 			
-			if (k1.compareTo(k2)<0) {
+			if (k1.compareTo(k2)<0) { // k2 > k1
 				f3.write(registrof1);
 				registrof1 = leerRegistro(f1);
 				
+			}else if(k1.compareTo(k2)>0){  //k1 > k2
+				f3.write(registrof2);
+				registrof2 = leerRegistro(f2);
+			}else {
+				f3.write(registrof1);
+				f3.write(registrof2);
+				registrof1 = leerRegistro(f1);
+				registrof2 = leerRegistro(f2);
 			}
 			
 			
