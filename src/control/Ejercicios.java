@@ -921,8 +921,8 @@ public class Ejercicios {
 			}
 			*/
 			
-			/*
-			 --------------- OPCIÓN CORTA -----------
+			
+			// --------------- OPCIÓN CORTA -----------
 			public void leerFichero(String rutaFichero) {
 				try {
 					BufferedReader fichero;
@@ -941,7 +941,7 @@ public class Ejercicios {
 					System.out.println("IO Excepcion");
 				}		
 			}
-			 */
+			 
 			
 			//--------ACTIVIDAD: Devuelve una lista de objetos de la clase Persona  ----------------------   15/01/2019
 			
@@ -2353,6 +2353,59 @@ public class Ejercicios {
 	}
 
 	
+
+	//--------ACTIVIDAD:Leer dos ficheros ordenados y unirlo en un tercero y ordenarlos -----------------------------------------27/03/2019
+	/*
+	 * Mezcla de dos ficheros de texto, ordenados previamente por un campo (clave)
+	 */
+	
+	public String leerRegistro(BufferedReader fichero) throws IOException{
+		String registro = fichero.readLine();
+		if(registro == null) { // Fin fichero
+			return "zzz"; // Es nuestro MAX_VALUE ('policía', que se comparará y siempre será el valor mayor)
+		}
+		return registro;
+	}
+	
+	
+	public void mezclaFicherosOrdenados(String rutaF1, String rutaF2, String rutaF3) throws IOException {
+		// Abrir fichero entrada (lectura)
+		BufferedReader f1 = new BufferedReader(new FileReader(rutaF1));
+		BufferedReader f2 = new BufferedReader(new FileReader(rutaF2));
+		
+		// Abrir fichero salida (escritura)
+		BufferedWriter f3= new BufferedWriter(new FileWriter(rutaF3));
+		
+		
+		String registrof1 = leerRegistro(f1);
+		String registrof2 = leerRegistro(f2);
+		
+		while (true) {
+			String k1 = registrof1.split("#")[0];  // El '0' determina coger el primer elemento
+			String k2 = registrof2.split("#")[0]; 
+			
+			
+			if (k1.compareTo(k2)<0) {
+				f3.write(registrof1);
+				registrof1 = leerRegistro(f1);
+				
+			}
+			
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		//f1.close();
+		//f2.close();
+		//f3.close();
+		
+	}
 	
 	
 	
@@ -2362,8 +2415,14 @@ public class Ejercicios {
 	
 	
 	
-	//Leer dos ficheros ordenados y unirlo en un tercero y ordenarlos
 	
+	
+	
+	
+	
+	
+	
+	// Leer dos ficheros desordenador y unirlos en un tercer fichero o arrayList  
 
 	
 	
