@@ -2362,7 +2362,7 @@ public class Ejercicios {
 	public String leerRegistro(BufferedReader fichero) throws IOException{
 		String registro = fichero.readLine();
 		if(registro == null) { // Fin fichero
-			return "zzz"; // Es nuestro MAX_VALUE ('policía', que se comparará y siempre será el valor mayor)
+			return "z"; // Es nuestro MAX_VALUE ('policía', que se comparará y siempre será el valor mayor)
 		}
 		return registro;
 	}
@@ -2380,38 +2380,30 @@ public class Ejercicios {
 		String registrof1 = leerRegistro(f1);
 		String registrof2 = leerRegistro(f2);
 		
-		while (registrof1 != null && registrof2 != null) {
+		//while (!registrof1.contentEquals("z") || !registrof2.contentEquals("z")) {
+		while (registrof1 != "z") {
 			String k1 = registrof1.split("#")[0];  // El '0' determina coger el primer elemento
 			String k2 = registrof2.split("#")[0]; 
 			
 			
 			if (k1.compareTo(k2)<0) { // k2 > k1
-				f3.write(registrof1);
+				f3.write(registrof1 + "\n");
 				registrof1 = leerRegistro(f1);
 				
-			}else if(k1.compareTo(k2)>0){  //k1 > k2
-				f3.write(registrof2);
-				registrof2 = leerRegistro(f2);
-			}else {
-				f3.write(registrof1);
-				f3.write(registrof2);
-				registrof1 = leerRegistro(f1);
+			}else {   //k1 > k2  o ==
+				f3.write(registrof2 + "\n");
 				registrof2 = leerRegistro(f2);
 			}
-			
-			
-			
-			
-			
-			
 		}
 		
+		while(registrof2 != "z") {
+			f3.write(registrof2 + "\n");
+			registrof2 = leerRegistro(f2);
+		}
 		
-		
-		
-		//f1.close();
-		//f2.close();
-		//f3.close();
+		f1.close();
+		f2.close();
+		f3.close();
 		
 	}
 	
@@ -2457,13 +2449,22 @@ public class Ejercicios {
 	
 
 	
-	public static void main(String[]args) {
+	public static void main(String[]args){
 		
 		Ejercicios ejercicios = new Ejercicios();
 
 		
+		try {
+			ejercicios.mezclaFicherosOrdenados("ficheros/rutaf1.txt", "ficheros/rutaf2.txt", "ficheros/rutaf3.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		 HashMap<String, Jugador> resultNombr = ejercicios.creaMapaJugadores("ficheros/jugadores2.txt");
+		
+		
+		
+		HashMap<String, Jugador> resultNombr = ejercicios.creaMapaJugadores("ficheros/jugadores2.txt");
 		 ejercicios.ordenarMapaJugadoresNombre(resultNombr);
 
 		//ArrayList<Jugador> resultListaJug = ejercicios.creaListaJugadores("ficheros/jugadores.txt");
@@ -2539,7 +2540,12 @@ public class Ejercicios {
 		
 		
 		
-/*	
+/*
+ 		//27/03/2019--------ACTIVIDAD:Leer dos ficheros ordenados y unirlo en un tercero y ordenarlos -----------------------------------------
+ 		 
+ 		 
+ 		 
+ 		 
  		//20/03/2019--------ACTIVIDAD: Recursividad -----------------------------------------
  		File inputFolder = new File("C:/users"); 
 		traverse(inputFolder, "");
