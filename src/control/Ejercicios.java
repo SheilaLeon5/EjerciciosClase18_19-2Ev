@@ -2362,12 +2362,12 @@ public class Ejercicios {
 	public String leerRegistro(BufferedReader fichero) throws IOException{
 		String registro = fichero.readLine();
 		if(registro == null) { // Fin fichero
-			return "z"; // Es nuestro MAX_VALUE ('policía', que se comparará y siempre será el valor mayor)
+			return "Z"; // Es nuestro MAX_VALUE ('policía', que se comparará y siempre será el valor mayor)
 		}
 		return registro;
 	}
 	
-	
+	/*	
 	public void mezclaFicherosOrdenados(String rutaF1, String rutaF2, String rutaF3) throws IOException {
 		// Abrir fichero entrada (lectura)
 		BufferedReader f1 = new BufferedReader(new FileReader(rutaF1));
@@ -2404,8 +2404,65 @@ public class Ejercicios {
 		f1.close();
 		f2.close();
 		f3.close();
-		
 	}
+*/	
+	
+	
+	
+	public void mezclaFicherosOrdenados(String rutaF1, String rutaF2, String rutaF3) throws IOException {
+		// Abrir fichero entrada (lectura)
+		BufferedReader f1 = new BufferedReader(new FileReader(rutaF1));
+		BufferedReader f2 = new BufferedReader(new FileReader(rutaF2));
+		
+		// Abrir fichero salida (escritura)
+		BufferedWriter f3= new BufferedWriter(new FileWriter(rutaF3));
+		
+		
+		String registrof1 = leerRegistro(f1);
+		String registrof2 = leerRegistro(f2);
+		
+		while (registrof1 != "Z") {
+			String k1 = registrof1.split("#")[0];  // El '0' determina coger el primer elemento
+			String k2 = registrof2.split("#")[0]; 
+			
+			if (k1.length() == k2.length() & k1.compareTo(k2)<0) { // k2 > k1
+				f3.write(registrof1 + "\n");
+				registrof1 = leerRegistro(f1);
+				
+			}else if (k1.length() == k2.length() & k1.compareTo(k2)>0) {   //k1 > k2  
+				f3.write(registrof2 + "\n");
+				registrof2 = leerRegistro(f2);
+			}else {
+				if(k1.length()>k2.length()) {
+					f3.write(registrof2 + "\n");
+					registrof2 = leerRegistro(f2);
+				}else {
+					f3.write(registrof1 + "\n");
+					registrof1 = leerRegistro(f1);
+				}
+			}
+		}
+/*		while(registrof2 != "Z") {
+			f3.write(registrof2 + "\n");
+			registrof2 = leerRegistro(f2);
+		}
+*/
+
+		f1.close();
+		f2.close();
+		f3.close();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -2452,7 +2509,8 @@ public class Ejercicios {
 	public static void main(String[]args){
 		
 		Ejercicios ejercicios = new Ejercicios();
-
+	
+		
 		
 		try {
 			ejercicios.mezclaFicherosOrdenados("ficheros/rutaf1.txt", "ficheros/rutaf2.txt", "ficheros/rutaf3.txt");
@@ -2460,7 +2518,7 @@ public class Ejercicios {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
 		
 		
 		
