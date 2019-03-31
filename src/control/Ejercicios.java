@@ -2362,7 +2362,7 @@ public class Ejercicios {
 	public String leerRegistro(BufferedReader fichero) throws IOException{
 		String registro = fichero.readLine();
 		if(registro == null) { // Fin fichero
-			return "Z"; // Es nuestro MAX_VALUE ('policía', que se comparará y siempre será el valor mayor)
+			return "zzz"; // Es nuestro MAX_VALUE ('policía', que se comparará y siempre será el valor mayor)
 		}
 		return registro;
 	}
@@ -2421,19 +2421,19 @@ public class Ejercicios {
 		String registrof1 = leerRegistro(f1);
 		String registrof2 = leerRegistro(f2);
 		
-		while (registrof1 != "Z") {
+		while (registrof1 != "zzz") {
 			String k1 = registrof1.split("#")[0];  // El '0' determina coger el primer elemento
 			String k2 = registrof2.split("#")[0]; 
 			
-			if (k1.length() == k2.length() & k1.compareTo(k2)<0) { // k2 > k1
-				f3.write(registrof1 + "\n");
-				registrof1 = leerRegistro(f1);
-				
-			}else if (k1.length() == k2.length() & k1.compareTo(k2)>0) {   //k1 > k2  
-				f3.write(registrof2 + "\n");
-				registrof2 = leerRegistro(f2);
-			}else {
-				if(k1.length()>k2.length()) {
+			if (k1.length() == k2.length()) { // Misma longitud
+				if (k1.compareTo(k2)<0) {   //k2 > k1
+					f3.write(registrof1 + "\n");
+					registrof1 = leerRegistro(f1);
+				}else {
+					f3.write(registrof2 + "\n");
+					registrof2 = leerRegistro(f2);
+				}
+			}else if(k1.length()>k2.length()){
 					f3.write(registrof2 + "\n");
 					registrof2 = leerRegistro(f2);
 				}else {
@@ -2441,12 +2441,10 @@ public class Ejercicios {
 					registrof1 = leerRegistro(f1);
 				}
 			}
-		}
-/*		while(registrof2 != "Z") {
+		while(registrof2 != "zzz") {
 			f3.write(registrof2 + "\n");
 			registrof2 = leerRegistro(f2);
 		}
-*/
 
 		f1.close();
 		f2.close();
@@ -2454,31 +2452,7 @@ public class Ejercicios {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	// Leer dos ficheros desordenador y unirlos en un tercer fichero o arrayList  
 
 	
@@ -2600,7 +2574,13 @@ public class Ejercicios {
 		
 /*
  		//27/03/2019--------ACTIVIDAD:Leer dos ficheros ordenados y unirlo en un tercero y ordenarlos -----------------------------------------
- 		 
+ 		 try {
+			ejercicios.mezclaFicherosOrdenados("ficheros/rutaf1.txt", "ficheros/rutaf2.txt", "ficheros/rutaf3.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
  		 
  		 
  		 
