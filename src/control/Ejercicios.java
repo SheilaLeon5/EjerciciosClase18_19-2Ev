@@ -2485,7 +2485,6 @@ public class Ejercicios {
 		Ejercicios ejercicios = new Ejercicios();
 	
 		
-		
 		try {
 			ejercicios.mezclaFicherosOrdenados("ficheros/rutaf1.txt", "ficheros/rutaf2.txt", "ficheros/rutaf3.txt");
 		} catch (IOException e) {
